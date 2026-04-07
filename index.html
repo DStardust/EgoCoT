@@ -198,6 +198,44 @@
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const zoomableImages = document.querySelectorAll(".zoomable-image");
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".lightbox-close");
+
+    zoomableImages.forEach(img => {
+      img.addEventListener("click", function () {
+        lightboxImg.src = this.src;
+        lightboxImg.alt = this.alt || "Expanded figure";
+        lightbox.classList.add("show");
+      });
+    });
+
+    closeBtn.addEventListener("click", function () {
+      lightbox.classList.remove("show");
+    });
+
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("show");
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        lightbox.classList.remove("show");
+      }
+    });
+  });
+</script>
+
+<div id="image-lightbox" class="image-lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" class="lightbox-img" src="" alt="Expanded figure">
+</div>
+
 <body>
 
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -208,7 +246,7 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-body">
-        <div class="container is-max-desktop">
+        <div class="container egocot-wide">
           <div class="columns is-centered">
             <div class="column has-text-centered">
               <h1 class="title is-1 publication-title">
@@ -219,13 +257,23 @@
               </h2>
 
               <div class="is-size-5 publication-authors" style="margin-top: 1rem;">
-                <span class="author-block">Yang Dai,</span>
-                <span class="author-block">Dian Jiao,</span>
-                <span class="author-block">Tianwei Lin</span>
+                <span class="author-block author-equal author-equal-1">
+                  <a href="#" target="_blank">Yang Dai</a><sup>*</sup>,
+                </span>
+                <span class="author-block author-equal author-equal-2">
+                  <a href="#" target="_blank">Dian Jiao</a><sup>*</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Tianwei Lin</a>
+                </span>
               </div>
 
               <div class="is-size-5 publication-authors">
                 <span class="author-block">Zhejiang University</span>
+              </div>
+
+              <div class="is-size-6 publication-authors" style="margin-top: 0.15rem;">
+                <span class="eql-cntrb"><small><sup>*</sup>Indicates Equal Contribution</small></span>
               </div>
 
               <div class="is-size-6" style="margin-top: 0.25rem; color: #666;">
@@ -286,12 +334,11 @@
 
     <!-- Teaser -->
     <section class="hero teaser">
-      <div class="container is-max-desktop">
+      <div class="container egocot-wide">
         <div class="hero-body">
-          <img src="static/images/teaser.png" alt="EgoCoT-Bench teaser" style="width: 100%; border-radius: 12px;">
+          <img class="zoomable-image" src="static/images/overview.png" alt="Overview of EgoCoT-Bench" style="width: 100%; border-radius: 12px;">
           <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
-            EgoCoT-Bench evaluates grounded and verifiable operation-centric reasoning in egocentric videos,
-            with explicit step-by-step rationales and spatio-temporal evidence.
+            Overview of EgoCoT-Bench: task taxonomy, sample questions, and the STSG-guided human verification pipeline.
           </h2>
         </div>
       </div>
@@ -299,7 +346,7 @@
 
     <!-- Abstract -->
     <section class="section hero is-light">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
             <h2 class="title is-3">Abstract</h2>
@@ -328,7 +375,7 @@
 
     <!-- At a glance -->
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Dataset at a Glance</h2>
         <div class="columns is-centered">
           <div class="column is-10">
@@ -349,13 +396,13 @@
 
     <!-- Task definition -->
     <section class="section is-light" id="tasks" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Task Definition</h2>
 
         <div class="content has-text-centered">
           <p>
             EgoCoT-Bench structures questions into four operation-centric task groups:
-            <strong>EGP</strong>, <strong>STR</strong>, <strong>PCI</strong>, and <strong>HGR</strong>,
+            <strong>Egocentric Grounding and Perception</strong>, <strong>Spatio-Temporal Retrospection </strong>, <strong>Predictive and Causal Inference</strong>, and <strong>High-level Grounded Reasoning</strong>,
             covering fine-grained grounding, retrospection, anticipation, and high-level reasoning.
           </p>
         </div>
@@ -474,38 +521,94 @@
 
     <!-- Annotation schema -->
     <section class="section" id="schema">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Annotation Schema</h2>
         <div class="columns is-centered">
           <div class="column is-11">
             <div class="content">
-              <p>Each sample includes:</p>
+              <p>
+                Each accepted sample contains a question-answer pair, step-by-step reasoning,
+                and structured spatio-temporal evidence. For website presentation, we expose the
+                core annotation fields and merge reviewer-side duplicates back into the original fields.
+              </p>
               <ul>
-                <li><strong>Question</strong></li>
-                <li><strong>Options / Answer</strong></li>
-                <li><strong>Step-by-step rationale</strong></li>
-                <li><strong>Supporting timestamps</strong></li>
-                <li><strong>Bounding boxes</strong> for localized visual evidence</li>
-                <li><strong>Interaction evidence</strong> linking operator actions and object states</li>
+                <li><strong>Sample identity:</strong> <code>qid</code>, <code>media_id</code>, <code>source</code></li>
+                <li><strong>Task taxonomy:</strong> <code>big_category_en</code>, <code>sub_category_en</code></li>
+                <li><strong>QA annotation:</strong> <code>question</code>, <code>choices</code>, <code>answer</code></li>
+                <li><strong>Reasoning annotation:</strong> <code>reasoning</code> with step-by-step rationale</li>
+                <li><strong>Evidence annotation:</strong> target objects, timestamps, bounding boxes, interaction relations, and focused evidence anchors</li>
               </ul>
+              <p>
+                Internal review fields such as reviewer copies, review status, and reconciliation metadata
+                are omitted here for clarity.
+              </p>
             </div>
 
-<pre><code>{
-  "video_id": "P01-xxxx",
-  "task_group": "PCI",
-  "subtask": "LCOI",
-  "question": "Which recent action most directly caused the observed state change?",
-  "options": ["A", "B", "C", "D"],
-  "answer": "B",
-  "rationale": [
-    "The right hand grasps the bottle cap.",
-    "The cap is rotated counterclockwise.",
-    "The bottle changes from closed to open."
-  ],
-  "timestamps": ["00:05.2-00:07.4"],
-  "bboxes": ["frame_142: [x1, y1, x2, y2]"],
-  "interaction_evidence": "hand(cap) -> rotate -> bottle(open)"
-}</code></pre>
+    <pre><code>{
+      "qid": "ego_000000",
+      "media_id": "P01_01_7_scaled_910x512_4fps_887175d5",
+      "source": "media/P01_01_7_scaled_910x512_4fps_887175d5.mp4",
+
+      "big_category_en": "Egocentric Grounding &amp; Perception",
+      "sub_category_en": "Active Object Grounding",
+
+      "question": "At 1.0 seconds, which operator body part is actively engaging the scene by holding a black pot near the sink with running water?",
+      "choices": {
+        "A": "right hand",
+        "B": "left hand",
+        "C": "chin",
+        "D": "forehead"
+      },
+      "answer": "B",
+
+      "reasoning": {
+        "step1": "At 00:01.00, the target appears in the lower-left region with bbox evidence consistent with left-hand placement in egocentric view.",
+        "step2": "The structured evidence and natural-language description jointly indicate that the left hand is holding the pot at this moment."
+      },
+
+      "evidence": {
+        "target_objects": [
+          {
+            "distinct_id": 3,
+            "label": "left hand"
+          }
+        ],
+        "timestamps": [
+          "00:01.00",
+          "00:02.00",
+          "00:03.00"
+        ],
+        "bboxes": [
+          {
+            "distinct_id": 3,
+            "time": "00:01.00",
+            "bbox": [329, 317, 470, 511]
+          }
+        ],
+        "relations": [
+          {
+            "subject_name": "left hand",
+            "predicate": "near",
+            "object_name": "bottle",
+            "time": ["00:01.00", "00:01.00"]
+          },
+          {
+            "subject_name": "camera wearer (operator)",
+            "predicate": "manipulates objects using",
+            "object_name": "left hand",
+            "time": ["00:01.00"]
+          }
+        ],
+        "focus_times": ["00:01.00"],
+        "focused_bboxes": [
+          {
+            "distinct_id": 3,
+            "time": "00:01.00",
+            "bbox": [329, 317, 470, 511]
+          }
+        ]
+      }
+    }</code></pre>
           </div>
         </div>
       </div>
@@ -513,22 +616,25 @@
 
     <!-- Main results -->
     <section class="section is-light" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
-        <h2 class="title is-3 has-text-centered">Main Results</h2>
+      <div class="container egocot-wide">
+        <h2 class="title is-3 has-text-centered">Overall Statistics</h2>
 
         <div class="content has-text-centered">
           <p>
-            Representative evaluation results on EgoCoT-Bench. Replace the figures below with your
-            final main table visualization / radar chart / grouped bar chart.
+            Overall statistics of EgoCoT-Bench, including an overview of benchmark dimensions
+            and the distribution of video sources.
           </p>
         </div>
 
-        <div class="columns is-centered is-variable is-6">
-          <div class="column is-6">
-            <img src="static/images/main_results.png" alt="Main results" style="width: 100%; border-radius: 12px;">
-          </div>
-          <div class="column is-6">
-            <img src="static/images/reasoning_results.png" alt="Reasoning results" style="width: 100%; border-radius: 12px;">
+        <div class="columns is-centered">
+          <div class="column is-10">
+            <img class="zoomable-image"
+                src="static/images/overall.png"
+                alt="Overall statistics of EgoCoT-Bench"
+                style="width: 100%; border-radius: 12px;">
+            <p class="has-text-centered" style="margin-top: 1rem; color: #666;">
+              Figure 2. Overall statistics of EgoCoT-Bench.
+            </p>
           </div>
         </div>
       </div>
@@ -536,7 +642,7 @@
 
     <!-- Leaderboard -->
     <section class="section" id="leaderboard">
-      <div class="container is-max-desktop">
+      <div class="container egocot-wide">
         <h2 class="title is-3 has-text-centered">Leaderboard</h2>
         <div class="table-container">
           <table class="table is-fullwidth is-striped is-hoverable">
@@ -596,7 +702,7 @@
 
     <!-- Examples -->
     <section class="section is-light" id="examples" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Browsable Examples</h2>
 
         <div class="columns is-multiline">
@@ -637,11 +743,11 @@
 
     <!-- Comparison -->
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container egocot-wide">
         <h2 class="title is-3 has-text-centered">Benchmark Comparison</h2>
         <div class="columns is-centered">
           <div class="column is-11">
-            <img src="static/images/benchmark_comparison.png" alt="Benchmark comparison" style="width: 100%; border-radius: 12px;">
+            <img class="zoomable-image" src="static/images/benchmark_comparison.png" alt="Benchmark comparison" style="width: 100%; border-radius: 12px;">
             <p class="has-text-centered" style="margin-top: 1rem;">
               Comparison with representative video and egocentric benchmarks.
             </p>
@@ -652,12 +758,12 @@
 
     <!-- Pipeline -->
     <section class="section is-light" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
+      <div class="container egocot-wide">
         <h2 class="title is-3 has-text-centered">Construction Pipeline</h2>
 
         <div class="columns is-centered">
           <div class="column is-11">
-            <img src="static/images/pipeline.png" alt="Construction pipeline" style="width: 100%; border-radius: 12px;">
+            <img class="zoomable-image" src="static/images/pipeline.png" alt="Construction pipeline" style="width: 100%; border-radius: 12px;">
           </div>
         </div>
 
@@ -675,7 +781,7 @@
 
     <!-- Evaluation -->
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Evaluation Protocol</h2>
         <div class="columns is-centered">
           <div class="column is-11">
@@ -700,29 +806,26 @@
 
     <!-- Judge validation -->
     <section class="section is-light" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
-        <h2 class="title is-3 has-text-centered">Judge Validation</h2>
-        <div class="columns is-centered">
-          <div class="column is-10">
-            <div class="content has-text-centered">
-              <p>
-                We evaluate the reliability of LLM-based reasoning judgment by comparing LLM scores with human scores on a sampled subset.
-              </p>
-            </div>
+      <div class="container egocot-wide">
+        <h2 class="title is-3 has-text-centered">Benchmark Results &amp; Judge Validation</h2>
 
-            <div class="columns is-centered is-variable is-6">
-              <div class="column is-6">
-                <img src="static/images/judge_validation.png" alt="Judge validation" style="width: 100%; border-radius: 12px;">
-              </div>
-              <div class="column is-6">
-                <div class="box">
-                  <p><strong>Quadratic Weighted Kappa (QWK):</strong> 0.93</p>
-                  <p><strong>±1 agreement:</strong> 96.7%</p>
-                  <p><strong>Exact agreement:</strong> 75.3%</p>
-                  <p><strong>Human evaluation subset:</strong> 2,800 responses</p>
-                </div>
-              </div>
-            </div>
+        <div class="content has-text-centered">
+          <p>
+            Fine-grained benchmark results on EgoCoT-Bench. The figure summarizes subtask-level answer accuracy,
+            group-wise reasoning quality using Reasoning Score (R) and inverted SCR, and the agreement between
+            LLM-based judgment and human consensus.
+          </p>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column is-11">
+            <img class="zoomable-image"
+                src="static/images/radar.png"
+                alt="Fine-grained benchmark results and judge validation on EgoCoT-Bench"
+                style="width: 100%; border-radius: 14px;">
+            <p class="has-text-centered" style="margin-top: 1rem; color: #666;">
+              Figure 3. Fine-grained radar analysis and judge validation on EgoCoT-Bench.
+            </p>
           </div>
         </div>
       </div>
@@ -730,7 +833,7 @@
 
     <!-- Demo videos -->
     <section class="section">
-      <div class="container is-max-desktop">
+      <div class="container egocot-wide">
         <h2 class="title is-3 has-text-centered">Demo Videos</h2>
         <div class="columns is-multiline">
           <div class="column is-4">
@@ -754,7 +857,7 @@
 
     <!-- Access -->
     <section class="section is-light" style="background: #f8f9fb;">
-      <div class="container is-max-desktop">
+      <div class="container egocot-text">
         <h2 class="title is-3 has-text-centered">Access, License, and Review Notes</h2>
         <div class="content">
           <ul>
