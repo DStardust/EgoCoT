@@ -178,6 +178,26 @@
   }
   </script>
 </head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll("#tasks .task-tab");
+    const panels = document.querySelectorAll("#tasks .task-panel");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", function () {
+        const target = this.getAttribute("data-target");
+
+        tabs.forEach(t => t.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+
+        this.classList.add("active");
+        document.getElementById(target).classList.add("active");
+      });
+    });
+  });
+</script>
+
 <body>
 
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -200,14 +220,8 @@
 
               <div class="is-size-5 publication-authors" style="margin-top: 1rem;">
                 <span class="author-block">Yang Dai,</span>
-                <span class="author-block">Jianxiang An,</span>
-                <span class="author-block">Tianwei Lin,</span>
-                <span class="author-block">Hongyang He,</span>
-                <span class="author-block">Hongzhe Huang,</span>
-                <span class="author-block">Wenqiao Zhang,</span>
-                <span class="author-block">Zheqi Lv,</span>
-                <span class="author-block">Siliang Tang,</span>
-                <span class="author-block">Yueting Zhuang</span>
+                <span class="author-block">Dian Jiao,</span>
+                <span class="author-block">Tianwei Lin</span>
               </div>
 
               <div class="is-size-5 publication-authors">
@@ -338,56 +352,121 @@
       <div class="container is-max-desktop">
         <h2 class="title is-3 has-text-centered">Task Definition</h2>
 
-        <div class="content">
+        <div class="content has-text-centered">
           <p>
-            EgoCoT-Bench contains four task groups covering fine-grained grounding, retrospection,
-            anticipation, and high-level operation-centric reasoning.
+            EgoCoT-Bench structures questions into four operation-centric task groups:
+            <strong>EGP</strong>, <strong>STR</strong>, <strong>PCI</strong>, and <strong>HGR</strong>,
+            covering fine-grained grounding, retrospection, anticipation, and high-level reasoning.
           </p>
         </div>
 
-        <div class="columns is-multiline">
-          <div class="column is-6">
-            <div class="box">
-              <h3 class="title is-5">Egocentric Grounding &amp; Perception (EGP)</h3>
-              <ul>
-                <li><strong>AOG:</strong> Active Object Grounding</li>
-                <li><strong>HOA:</strong> Hand-Object Association</li>
-                <li><strong>MSP:</strong> Manipulation State Perception</li>
-              </ul>
-            </div>
-          </div>
+        <div class="task-tabs">
+          <button class="task-tab active" data-target="egp-panel">
+            <span>Egocentric Grounding</span>
+            <span>&amp; Perception</span>
+          </button>
+          <button class="task-tab" data-target="str-panel">
+            <span>Spatio-Temporal</span>
+            <span>Retrospection</span>
+          </button>
+          <button class="task-tab" data-target="pci-panel">
+            <span>Predictive &amp; Causal</span>
+            <span>Inference</span>
+          </button>
+          <button class="task-tab" data-target="hgr-panel">
+            <span>High-level Grounded</span>
+            <span>Reasoning</span>
+          </button>
+        </div>
 
-          <div class="column is-6">
-            <div class="box">
-              <h3 class="title is-5">Spatio-Temporal Retrospection (STR)</h3>
-              <ul>
-                <li><strong>SR:</strong> State Retrospection</li>
-                <li><strong>LVR:</strong> Location / Visibility Retrospection</li>
-                <li><strong>HOTR:</strong> Hand-Object Temporal Retrospection</li>
-              </ul>
-            </div>
-          </div>
+          <div class="task-panels">
 
-          <div class="column is-6">
-            <div class="box">
-              <h3 class="title is-5">Predictive &amp; Causal Inference (PCI)</h3>
-              <ul>
-                <li><strong>NSA:</strong> Next State Anticipation</li>
-                <li><strong>NAA:</strong> Next Action Anticipation</li>
-                <li><strong>LCOI:</strong> Local Cause-Outcome Inference</li>
-              </ul>
-            </div>
-          </div>
+            <div class="task-panel active" id="egp-panel">
+              <div class="task-group-intro">
 
-          <div class="column is-6">
-            <div class="box">
-              <h3 class="title is-5">High-level Grounded Reasoning (HGR)</h3>
-              <ul>
-                <li><strong>PR:</strong> Procedural Reasoning</li>
-                <li><strong>GOT:</strong> Goal-Oriented Object Tracking</li>
-                <li><strong>HGC:</strong> High-level Goal Comprehension</li>
-              </ul>
+                This group evaluates whether a model can correctly identify the current target of interaction
+                and understand the immediate manipulation context in first-person videos.
+              </div>
+
+              <div class="task-subitem">
+                <strong>Active Object Grounding (AOG):</strong>
+                Identify the object that is currently being attended to, touched, or manipulated by the operator.
+              </div>
+              <div class="task-subitem">
+                <strong>Hand-Object Association (HOA):</strong>
+                Determine which hand is interacting with which object at the current moment.
+              </div>
+              <div class="task-subitem">
+                <strong>Manipulation State Perception (MSP):</strong>
+                Recognize the current manipulation-related state of the object.
+              </div>
             </div>
+
+            <div class="task-panel" id="str-panel">
+              <div class="task-group-intro">
+
+                This group measures whether a model can recall earlier evidence about object states,
+                locations, and interaction order from preceding moments.
+              </div>
+
+              <div class="task-subitem">
+                <strong>State Retrospection (SR):</strong>
+                Recall the earlier state of an object before the current moment.
+              </div>
+              <div class="task-subitem">
+                <strong>Location / Visibility Retrospection (LVR):</strong>
+                Recall where an object was earlier, or determine whether it was previously visible or within the field of view.
+              </div>
+              <div class="task-subitem">
+                <strong>Hand-Object Temporal Retrospection (HOTR):</strong>
+                Recover the temporal order of hand-object interactions.
+              </div>
+            </div>
+
+            <div class="task-panel" id="pci-panel">
+              <div class="task-group-intro">
+
+                This group evaluates short-horizon anticipation and local causal reasoning grounded
+                in the current manipulation context.
+              </div>
+
+              <div class="task-subitem">
+                <strong>Next State Anticipation (NSA):</strong>
+                Predict the most likely next state of an object from the current operation context.
+              </div>
+              <div class="task-subitem">
+                <strong>Next Action Anticipation (NAA):</strong>
+                Predict the operator's most likely next action in the ongoing manipulation sequence.
+              </div>
+              <div class="task-subitem">
+                <strong>Local Cause-Outcome Inference (LCOI):</strong>
+                Determine which recent action most directly caused the currently observed local outcome or state change.
+              </div>
+            </div>
+
+            <div class="task-panel" id="hgr-panel">
+              <div class="task-group-intro">
+
+                This group focuses on more compositional reasoning over progress, goal-oriented tracking,
+                and interpretable evidence chains.
+              </div>
+
+              <div class="task-subitem">
+                <strong>Progress Reasoning (PR):</strong>
+                Infer which step the current operation has reached, or whether a certain manipulation step has already been completed.
+              </div>
+              <div class="task-subitem">
+                <strong>Hand-Object Grounded CoT (HGC):</strong>
+                Generate interpretable reasoning chains that explicitly combine hand-object interaction cues,
+                temporal evidence, and visual grounding.
+              </div>
+              <div class="task-subitem">
+                <strong>Goal-Oriented Object Tracking (GOT):</strong>
+                Track an object across time based on its functional role in the current manipulation goal,
+                rather than relying only on appearance.
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
