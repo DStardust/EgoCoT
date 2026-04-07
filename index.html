@@ -643,598 +643,529 @@
     </section>
 
     <!-- Leaderboard -->
-    <section class="section" id="leaderboard">
-      <div class="container leaderboard-shell">
-        <div class="leaderboard-card">
-          <h2 class="leaderboard-title">EgoCoT-Bench Leaderboard</h2>
-
-          <p class="leaderboard-note">
-            Main results are reported as accuracy (%). 🥇 🥈 🥉 indicate the top-3 models ranked by <strong>Mean</strong>.
-            The best results are highlighted in <span class="best-demo">bold and underlined</span>.
-          </p>
-
-          <p class="leaderboard-legend">
-            <span class="legend-chip legend-proprietary">Orange</span> Proprietary Multimodal Foundation Models
-            &nbsp;&nbsp;
-            <span class="legend-chip legend-open">Blue</span> Open-Source Multimodal Foundation Models
-            &nbsp;&nbsp;
-            <span class="legend-chip legend-human">Green</span> Human Reference
-          </p>
-
-          <div class="leaderboard-table-wrap">
-            <table class="leaderboard-table">
-              <thead>
-                <tr>
-                  <th rowspan="2" class="sticky-col">#</th>
-                  <th rowspan="2" class="sticky-col-2">Method</th>
-                  <th rowspan="2" class="group-divider">Mean</th>
-
-                  <th colspan="4" class="group-divider">Egocentric Grounding &amp; Perception</th>
-                  <th colspan="4" class="group-divider">Spatio-Temporal Retrospection</th>
-                  <th colspan="4" class="group-divider">Predictive &amp; Causal Inference</th>
-                  <th colspan="4">High-level Grounded Reasoning</th>
-                </tr>
-                <tr>
-                  <th>AOG</th>
-                  <th>HOA</th>
-                  <th>MSP</th>
-                  <th class="group-divider">Mean</th>
-
-                  <th>SR</th>
-                  <th>LVR</th>
-                  <th>HOTR</th>
-                  <th class="group-divider">Mean</th>
-
-                  <th>NSA</th>
-                  <th>NAA</th>
-                  <th>LCOI</th>
-                  <th class="group-divider">Mean</th>
-
-                  <th>PR</th>
-                  <th>HGC</th>
-                  <th>GOT</th>
-                  <th>Mean</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr class="ref-row">
-                  <td class="sticky-col">–</td>
-                  <td class="method sticky-col-2">Human</td>
-                  <td class="best group-divider">95.93</td>
-
-                  <td>96.18</td>
-                  <td>93.86</td>
-                  <td>97.18</td>
-                  <td class="group-divider">96.11</td>
-
-                  <td>93.96</td>
-                  <td>95.36</td>
-                  <td>96.88</td>
-                  <td class="group-divider">94.96</td>
-
-                  <td>98.47</td>
-                  <td>94.44</td>
-                  <td>95.00</td>
-                  <td class="group-divider">96.32</td>
-
-                  <td>98.71</td>
-                  <td>97.90</td>
-                  <td>91.98</td>
-                  <td>96.34</td>
-                </tr>
-
-                <tr class="section-row">
-                  <td colspan="19">Proprietary Multimodal Foundation Models</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">5</td>
-                  <td class="method sticky-col-2 model-proprietary">GPT-5.1</td>
-                  <td class="group-divider">66.71</td>
-
-                  <td>64.20</td>
-                  <td class="best">63.16</td>
-                  <td>77.00</td>
-                  <td class="group-divider">67.69</td>
-
-                  <td>66.04</td>
-                  <td>49.40</td>
-                  <td>56.25</td>
-                  <td class="group-divider">55.23</td>
-
-                  <td class="best">86.99</td>
-                  <td>67.17</td>
-                  <td>70.56</td>
-                  <td class="group-divider">76.63</td>
-
-                  <td>68.24</td>
-                  <td>79.83</td>
-                  <td class="best">45.28</td>
-                  <td>65.15</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">4</td>
-                  <td class="method sticky-col-2 model-proprietary">GPT-5.2</td>
-                  <td class="group-divider">67.91</td>
-
-                  <td>64.92</td>
-                  <td class="second">62.28</td>
-                  <td>72.30</td>
-                  <td class="group-divider">66.62</td>
-
-                  <td>67.55</td>
-                  <td>59.88</td>
-                  <td>59.38</td>
-                  <td class="group-divider">62.42</td>
-
-                  <td class="second">84.69</td>
-                  <td>64.14</td>
-                  <td>72.22</td>
-                  <td class="group-divider">75.68</td>
-
-                  <td>65.24</td>
-                  <td class="best">84.03</td>
-                  <td class="second">42.92</td>
-                  <td>64.86</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">6</td>
-                  <td class="method sticky-col-2 model-proprietary">Qwen3-VL-Plus</td>
-                  <td class="group-divider">67.12</td>
-
-                  <td class="second">69.21</td>
-                  <td>61.40</td>
-                  <td>77.00</td>
-                  <td class="group-divider">70.24</td>
-
-                  <td>69.70</td>
-                  <td>54.66</td>
-                  <td>56.25</td>
-                  <td class="group-divider">59.75</td>
-
-                  <td class="second">84.69</td>
-                  <td>66.16</td>
-                  <td>71.94</td>
-                  <td class="group-divider">76.00</td>
-
-                  <td>68.53</td>
-                  <td>77.54</td>
-                  <td>32.70</td>
-                  <td>60.53</td>
-                </tr>
-
-                <tr class="top3">
-                  <td class="sticky-col">3 🥉</td>
-                  <td class="method sticky-col-2 model-proprietary">Qwen3.5-Plus</td>
-                  <td class="second group-divider">70.68</td>
-
-                  <td>68.26</td>
-                  <td class="second">62.28</td>
-                  <td>85.92</td>
-                  <td class="best group-divider">72.39</td>
-
-                  <td>67.55</td>
-                  <td>60.69</td>
-                  <td>53.12</td>
-                  <td class="group-divider">62.67</td>
-
-                  <td>85.20</td>
-                  <td class="best">70.71</td>
-                  <td class="best">74.72</td>
-                  <td class="best group-divider">78.21</td>
-
-                  <td class="best">81.12</td>
-                  <td>82.77</td>
-                  <td>35.85</td>
-                  <td class="second">67.64</td>
-                </tr>
-
-                <tr class="section-row">
-                  <td colspan="19">Open-Source Multimodal Foundation Models</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">17</td>
-                  <td class="method sticky-col-2 model-open">InternVL3.5-1B</td>
-                  <td class="group-divider">53.91</td>
-
-                  <td>41.77</td>
-                  <td>55.26</td>
-                  <td>69.95</td>
-                  <td class="group-divider">51.88</td>
-
-                  <td>44.91</td>
-                  <td>51.21</td>
-                  <td class="best">75.00</td>
-                  <td class="group-divider">50.06</td>
-
-                  <td>64.29</td>
-                  <td>55.56</td>
-                  <td>56.94</td>
-                  <td class="group-divider">59.68</td>
-
-                  <td>55.36</td>
-                  <td>67.65</td>
-                  <td>32.55</td>
-                  <td>52.56</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">15</td>
-                  <td class="method sticky-col-2 model-open">InternVL3.5-2B</td>
-                  <td class="group-divider">61.79</td>
-
-                  <td>50.60</td>
-                  <td class="best">63.16</td>
-                  <td>79.81</td>
-                  <td class="group-divider">60.86</td>
-
-                  <td>58.11</td>
-                  <td class="second">66.94</td>
-                  <td class="second">71.88</td>
-                  <td class="group-divider">64.18</td>
-
-                  <td>77.30</td>
-                  <td>59.09</td>
-                  <td>58.33</td>
-                  <td class="group-divider">66.32</td>
-
-                  <td>60.94</td>
-                  <td>71.01</td>
-                  <td>26.42</td>
-                  <td>53.73</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">14</td>
-                  <td class="method sticky-col-2 model-open">InternVL3.5-4B</td>
-                  <td class="group-divider">61.95</td>
-
-                  <td>58.71</td>
-                  <td>59.65</td>
-                  <td>73.24</td>
-                  <td class="group-divider">63.00</td>
-
-                  <td>48.30</td>
-                  <td>54.44</td>
-                  <td>62.50</td>
-                  <td class="group-divider">52.71</td>
-
-                  <td>81.63</td>
-                  <td>59.60</td>
-                  <td>63.06</td>
-                  <td class="group-divider">70.00</td>
-
-                  <td>64.81</td>
-                  <td>75.63</td>
-                  <td>38.21</td>
-                  <td>60.32</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">16</td>
-                  <td class="method sticky-col-2 model-open">LLaVA-OneVision-1.5-4B</td>
-                  <td class="group-divider">60.78</td>
-
-                  <td>55.74</td>
-                  <td>54.39</td>
-                  <td>72.30</td>
-                  <td class="group-divider">60.27</td>
-
-                  <td>61.51</td>
-                  <td>55.04</td>
-                  <td>40.62</td>
-                  <td class="group-divider">56.62</td>
-
-                  <td>81.38</td>
-                  <td>61.11</td>
-                  <td>61.67</td>
-                  <td class="group-divider">69.68</td>
-
-                  <td>63.95</td>
-                  <td>73.11</td>
-                  <td>21.23</td>
-                  <td>53.88</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">19</td>
-                  <td class="method sticky-col-2 model-open">LLaVA-NeXT-Video-7B</td>
-                  <td class="group-divider">44.26</td>
-
-                  <td>35.08</td>
-                  <td>55.26</td>
-                  <td>46.95</td>
-                  <td class="group-divider">41.55</td>
-
-                  <td>46.42</td>
-                  <td>40.93</td>
-                  <td>56.25</td>
-                  <td class="group-divider">43.38</td>
-
-                  <td>62.24</td>
-                  <td>48.99</td>
-                  <td>48.61</td>
-                  <td class="group-divider">54.32</td>
-
-                  <td>33.91</td>
-                  <td>49.58</td>
-                  <td>17.45</td>
-                  <td>34.26</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">13</td>
-                  <td class="method sticky-col-2 model-open">InternVL3.5-8B</td>
-                  <td class="group-divider">64.06</td>
-
-                  <td>56.32</td>
-                  <td>61.40</td>
-                  <td>70.89</td>
-                  <td class="group-divider">61.26</td>
-
-                  <td>54.34</td>
-                  <td class="best">67.74</td>
-                  <td>68.75</td>
-                  <td class="group-divider">63.30</td>
-
-                  <td>80.36</td>
-                  <td>66.16</td>
-                  <td>67.22</td>
-                  <td class="group-divider">72.42</td>
-
-                  <td>66.95</td>
-                  <td>73.11</td>
-                  <td>25.94</td>
-                  <td>56.37</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">12</td>
-                  <td class="method sticky-col-2 model-open">LLaVA-OneVision-1.5-8B</td>
-                  <td class="group-divider">60.81</td>
-
-                  <td>53.94</td>
-                  <td>58.77</td>
-                  <td>74.65</td>
-                  <td class="group-divider">60.59</td>
-
-                  <td>57.36</td>
-                  <td>51.61</td>
-                  <td>40.62</td>
-                  <td class="group-divider">53.09</td>
-
-                  <td>82.14</td>
-                  <td>69.19</td>
-                  <td>61.94</td>
-                  <td class="group-divider">71.79</td>
-
-                  <td>68.67</td>
-                  <td>71.01</td>
-                  <td>21.23</td>
-                  <td>54.76</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">11</td>
-                  <td class="method sticky-col-2 model-open">Qwen3-VL-8B</td>
-                  <td class="group-divider">65.42</td>
-
-                  <td class="best">69.54</td>
-                  <td>59.29</td>
-                  <td>81.60</td>
-                  <td class="group-divider">71.43</td>
-
-                  <td>64.02</td>
-                  <td>60.69</td>
-                  <td>59.38</td>
-                  <td class="group-divider">61.75</td>
-
-                  <td>83.03</td>
-                  <td>63.13</td>
-                  <td>64.72</td>
-                  <td class="group-divider">71.91</td>
-
-                  <td>59.91</td>
-                  <td>78.15</td>
-                  <td>25.00</td>
-                  <td>55.43</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">10</td>
-                  <td class="method sticky-col-2 model-open">InternVL3.5-14B</td>
-                  <td class="group-divider">64.09</td>
-
-                  <td>56.32</td>
-                  <td>56.14</td>
-                  <td>75.12</td>
-                  <td class="group-divider">61.66</td>
-
-                  <td>56.98</td>
-                  <td>63.71</td>
-                  <td class="best">75.00</td>
-                  <td class="group-divider">61.92</td>
-
-                  <td>78.32</td>
-                  <td>65.66</td>
-                  <td>70.00</td>
-                  <td class="group-divider">72.53</td>
-
-                  <td>61.37</td>
-                  <td>72.27</td>
-                  <td>36.79</td>
-                  <td>57.54</td>
-                </tr>
-
-                <tr class="top1">
-                  <td class="sticky-col">1 🥇</td>
-                  <td class="method sticky-col-2 model-open">Qwen3.5-27B</td>
-                  <td class="best group-divider">71.28</td>
-
-                  <td>68.26</td>
-                  <td>61.40</td>
-                  <td>84.51</td>
-                  <td class="second group-divider">71.85</td>
-
-                  <td class="best">72.83</td>
-                  <td class="best">67.74</td>
-                  <td>59.38</td>
-                  <td class="best group-divider">69.10</td>
-
-                  <td>84.65</td>
-                  <td>68.69</td>
-                  <td>73.33</td>
-                  <td class="second group-divider">77.03</td>
-
-                  <td>77.68</td>
-                  <td>80.67</td>
-                  <td>34.43</td>
-                  <td>65.30</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">9</td>
-                  <td class="method sticky-col-2 model-open">Qwen3-VL-30B-A3B</td>
-                  <td class="group-divider">64.63</td>
-
-                  <td>62.44</td>
-                  <td>61.06</td>
-                  <td>82.16</td>
-                  <td class="group-divider">67.88</td>
-
-                  <td>65.15</td>
-                  <td>65.86</td>
-                  <td>62.50</td>
-                  <td class="second group-divider">65.49</td>
-
-                  <td>81.89</td>
-                  <td>59.09</td>
-                  <td>66.94</td>
-                  <td class="group-divider">71.47</td>
-
-                  <td>66.52</td>
-                  <td>73.11</td>
-                  <td>9.05</td>
-                  <td>51.10</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">7</td>
-                  <td class="method sticky-col-2 model-open">Qwen3-VL-32B</td>
-                  <td class="group-divider">67.09</td>
-
-                  <td>67.78</td>
-                  <td class="second">62.28</td>
-                  <td>79.81</td>
-                  <td class="group-divider">70.38</td>
-
-                  <td>64.53</td>
-                  <td>55.04</td>
-                  <td>68.75</td>
-                  <td class="group-divider">58.76</td>
-
-                  <td>84.18</td>
-                  <td class="second">70.20</td>
-                  <td>71.67</td>
-                  <td class="group-divider">76.53</td>
-
-                  <td>69.10</td>
-                  <td>79.83</td>
-                  <td>27.83</td>
-                  <td>60.03</td>
-                </tr>
-
-                <tr class="top3">
-                  <td class="sticky-col">3 🥉</td>
-                  <td class="method sticky-col-2 model-open">Qwen3.5-122B-A10B</td>
-                  <td class="group-divider">69.96</td>
-
-                  <td>68.26</td>
-                  <td>61.40</td>
-                  <td class="second">86.38</td>
-                  <td class="best group-divider">72.39</td>
-
-                  <td>70.72</td>
-                  <td>62.70</td>
-                  <td>56.25</td>
-                  <td class="group-divider">65.11</td>
-
-                  <td>81.63</td>
-                  <td class="best">70.71</td>
-                  <td class="second">73.61</td>
-                  <td class="group-divider">76.32</td>
-
-                  <td class="second">79.83</td>
-                  <td>79.41</td>
-                  <td>30.19</td>
-                  <td>64.28</td>
-                </tr>
-
-                <tr>
-                  <td class="sticky-col">8</td>
-                  <td class="method sticky-col-2 model-open">Qwen3-VL-235B-A22B</td>
-                  <td class="group-divider">65.86</td>
-
-                  <td>67.54</td>
-                  <td>57.02</td>
-                  <td>77.00</td>
-                  <td class="group-divider">68.63</td>
-
-                  <td class="second">71.32</td>
-                  <td>52.82</td>
-                  <td>56.25</td>
-                  <td class="group-divider">59.14</td>
-
-                  <td>85.97</td>
-                  <td>68.18</td>
-                  <td>62.50</td>
-                  <td class="group-divider">73.37</td>
-
-                  <td>70.82</td>
-                  <td>78.99</td>
-                  <td>27.36</td>
-                  <td>60.18</td>
-                </tr>
-
-                <tr class="top2">
-                  <td class="sticky-col">2 🥈</td>
-                  <td class="method sticky-col-2 model-open">Qwen3.5-397B-A17B</td>
-                  <td class="second group-divider">70.11</td>
-
-                  <td>68.26</td>
-                  <td>58.77</td>
-                  <td class="best">87.79</td>
-                  <td class="best group-divider">72.39</td>
-
-                  <td>69.81</td>
-                  <td>59.07</td>
-                  <td>56.25</td>
-                  <td class="group-divider">62.55</td>
-
-                  <td>84.95</td>
-                  <td>68.18</td>
-                  <td>70.83</td>
-                  <td class="group-divider">76.11</td>
-
-                  <td>78.97</td>
-                  <td>83.61</td>
-                  <td>38.68</td>
-                  <td class="best">68.08</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p class="leaderboard-subnote">
-            This main leaderboard follows the paper table format exactly: Mean accuracy, four category groups, and per-group means.
-          </p>
-        </div>
+<section class="section" id="leaderboard">
+  <div class="container leaderboard-shell">
+    <div class="leaderboard-card">
+      <h2 class="leaderboard-title">EgoCoT-Bench Leaderboard</h2>
+
+      <p class="leaderboard-note">
+        Results are reported as accuracy (%). Models are ranked globally by <strong>Mean</strong>.
+        🥇 🥈 🥉 indicate the top-3 models. Human is shown as a reference row and is not ranked.
+      </p>
+
+      <p class="leaderboard-legend">
+        <span class="legend-chip legend-proprietary">Orange</span> Proprietary model
+        &nbsp;&nbsp;
+        <span class="legend-chip legend-open">Blue</span> Open-source model
+        &nbsp;&nbsp;
+        <span class="legend-chip legend-human">Green</span> Human reference
+      </p>
+
+      <div class="leaderboard-table-wrap">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="rank-col">#</th>
+              <th rowspan="2" class="method-col">Method</th>
+              <th rowspan="2" class="group-divider">Mean</th>
+
+              <th colspan="4" class="group-divider group-head">
+                <span class="abbr">EGP</span>
+                <span class="full">Egocentric Grounding<br>&amp; Perception</span>
+              </th>
+
+              <th colspan="4" class="group-divider group-head">
+                <span class="abbr">STR</span>
+                <span class="full">Spatio-Temporal<br>Retrospection</span>
+              </th>
+
+              <th colspan="4" class="group-divider group-head">
+                <span class="abbr">PCI</span>
+                <span class="full">Predictive &amp; Causal<br>Inference</span>
+              </th>
+
+              <th colspan="4" class="group-head">
+                <span class="abbr">HGR</span>
+                <span class="full">High-level Grounded<br>Reasoning</span>
+              </th>
+            </tr>
+            <tr>
+              <th>AOG</th>
+              <th>HOA</th>
+              <th>MSP</th>
+              <th class="group-divider">Mean</th>
+
+              <th>SR</th>
+              <th>LVR</th>
+              <th>HOTR</th>
+              <th class="group-divider">Mean</th>
+
+              <th>NSA</th>
+              <th>NAA</th>
+              <th>LCOI</th>
+              <th class="group-divider">Mean</th>
+
+              <th>PR</th>
+              <th>HGC</th>
+              <th>GOT</th>
+              <th>Mean</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="ref-row">
+              <td class="rank">–</td>
+              <td class="method">Human</td>
+              <td class="group-divider best">95.93</td>
+
+              <td>96.18</td>
+              <td>93.86</td>
+              <td>97.18</td>
+              <td class="group-divider">96.11</td>
+
+              <td>93.96</td>
+              <td>95.36</td>
+              <td>96.88</td>
+              <td class="group-divider">94.96</td>
+
+              <td>98.47</td>
+              <td>94.44</td>
+              <td>95.00</td>
+              <td class="group-divider">96.32</td>
+
+              <td>98.71</td>
+              <td>97.90</td>
+              <td>91.98</td>
+              <td>96.34</td>
+            </tr>
+
+            <tr class="top1">
+              <td class="rank">1 🥇</td>
+              <td class="method model-open">Qwen3.5-27B</td>
+              <td class="group-divider best">71.28</td>
+              <td>68.26</td>
+              <td>61.40</td>
+              <td>84.51</td>
+              <td class="group-divider">71.85</td>
+              <td>72.83</td>
+              <td>67.74</td>
+              <td>59.38</td>
+              <td class="group-divider">69.10</td>
+              <td>84.65</td>
+              <td>68.69</td>
+              <td>73.33</td>
+              <td class="group-divider">77.03</td>
+              <td>77.68</td>
+              <td>80.67</td>
+              <td>34.43</td>
+              <td>65.30</td>
+            </tr>
+
+            <tr class="top2">
+              <td class="rank">2 🥈</td>
+              <td class="method model-proprietary">Qwen3.5-Plus</td>
+              <td class="group-divider">70.68</td>
+              <td>68.26</td>
+              <td>62.28</td>
+              <td>85.92</td>
+              <td class="group-divider">72.39</td>
+              <td>67.55</td>
+              <td>60.69</td>
+              <td>53.12</td>
+              <td class="group-divider">62.67</td>
+              <td>85.20</td>
+              <td>70.71</td>
+              <td>74.72</td>
+              <td class="group-divider">78.21</td>
+              <td>81.12</td>
+              <td>82.77</td>
+              <td>35.85</td>
+              <td>67.64</td>
+            </tr>
+
+            <tr class="top3">
+              <td class="rank">3 🥉</td>
+              <td class="method model-open">Qwen3.5-397B-A17B</td>
+              <td class="group-divider">70.11</td>
+              <td>68.26</td>
+              <td>58.77</td>
+              <td>87.79</td>
+              <td class="group-divider">72.39</td>
+              <td>69.81</td>
+              <td>59.07</td>
+              <td>56.25</td>
+              <td class="group-divider">62.55</td>
+              <td>84.95</td>
+              <td>68.18</td>
+              <td>70.83</td>
+              <td class="group-divider">76.11</td>
+              <td>78.97</td>
+              <td>83.61</td>
+              <td>38.68</td>
+              <td>68.08</td>
+            </tr>
+
+            <tr>
+              <td class="rank">4</td>
+              <td class="method model-open">Qwen3.5-122B-A10B</td>
+              <td class="group-divider">69.96</td>
+              <td>68.26</td>
+              <td>61.40</td>
+              <td>86.38</td>
+              <td class="group-divider">72.39</td>
+              <td>70.72</td>
+              <td>62.70</td>
+              <td>56.25</td>
+              <td class="group-divider">65.11</td>
+              <td>81.63</td>
+              <td>70.71</td>
+              <td>73.61</td>
+              <td class="group-divider">76.32</td>
+              <td>79.83</td>
+              <td>79.41</td>
+              <td>30.19</td>
+              <td>64.28</td>
+            </tr>
+
+            <tr>
+              <td class="rank">5</td>
+              <td class="method model-proprietary">GPT-5.2</td>
+              <td class="group-divider">67.91</td>
+              <td>64.92</td>
+              <td>62.28</td>
+              <td>72.30</td>
+              <td class="group-divider">66.62</td>
+              <td>67.55</td>
+              <td>59.88</td>
+              <td>59.38</td>
+              <td class="group-divider">62.42</td>
+              <td>84.69</td>
+              <td>64.14</td>
+              <td>72.22</td>
+              <td class="group-divider">75.68</td>
+              <td>65.24</td>
+              <td>84.03</td>
+              <td>42.92</td>
+              <td>64.86</td>
+            </tr>
+
+            <tr>
+              <td class="rank">6</td>
+              <td class="method model-proprietary">Qwen3-VL-Plus</td>
+              <td class="group-divider">67.12</td>
+              <td>69.21</td>
+              <td>61.40</td>
+              <td>77.00</td>
+              <td class="group-divider">70.24</td>
+              <td>69.70</td>
+              <td>54.66</td>
+              <td>56.25</td>
+              <td class="group-divider">59.75</td>
+              <td>84.69</td>
+              <td>66.16</td>
+              <td>71.94</td>
+              <td class="group-divider">76.00</td>
+              <td>68.53</td>
+              <td>77.54</td>
+              <td>32.70</td>
+              <td>60.53</td>
+            </tr>
+
+            <tr>
+              <td class="rank">7</td>
+              <td class="method model-open">Qwen3-VL-32B</td>
+              <td class="group-divider">67.09</td>
+              <td>67.78</td>
+              <td>62.28</td>
+              <td>79.81</td>
+              <td class="group-divider">70.38</td>
+              <td>64.53</td>
+              <td>55.04</td>
+              <td>68.75</td>
+              <td class="group-divider">58.76</td>
+              <td>84.18</td>
+              <td>70.20</td>
+              <td>71.67</td>
+              <td class="group-divider">76.53</td>
+              <td>69.10</td>
+              <td>79.83</td>
+              <td>27.83</td>
+              <td>60.03</td>
+            </tr>
+
+            <tr>
+              <td class="rank">8</td>
+              <td class="method model-proprietary">GPT-5.1</td>
+              <td class="group-divider">66.71</td>
+              <td>64.20</td>
+              <td>63.16</td>
+              <td>77.00</td>
+              <td class="group-divider">67.69</td>
+              <td>66.04</td>
+              <td>49.40</td>
+              <td>56.25</td>
+              <td class="group-divider">55.23</td>
+              <td>86.99</td>
+              <td>67.17</td>
+              <td>70.56</td>
+              <td class="group-divider">76.63</td>
+              <td>68.24</td>
+              <td>79.83</td>
+              <td>45.28</td>
+              <td>65.15</td>
+            </tr>
+
+            <tr>
+              <td class="rank">9</td>
+              <td class="method model-open">Qwen3-VL-235B-A22B</td>
+              <td class="group-divider">65.86</td>
+              <td>67.54</td>
+              <td>57.02</td>
+              <td>77.00</td>
+              <td class="group-divider">68.63</td>
+              <td>71.32</td>
+              <td>52.82</td>
+              <td>56.25</td>
+              <td class="group-divider">59.14</td>
+              <td>85.97</td>
+              <td>68.18</td>
+              <td>62.50</td>
+              <td class="group-divider">73.37</td>
+              <td>70.82</td>
+              <td>78.99</td>
+              <td>27.36</td>
+              <td>60.18</td>
+            </tr>
+
+            <tr>
+              <td class="rank">10</td>
+              <td class="method model-open">Qwen3-VL-8B</td>
+              <td class="group-divider">65.42</td>
+              <td>69.54</td>
+              <td>59.29</td>
+              <td>81.60</td>
+              <td class="group-divider">71.43</td>
+              <td>64.02</td>
+              <td>60.69</td>
+              <td>59.38</td>
+              <td class="group-divider">61.75</td>
+              <td>83.03</td>
+              <td>63.13</td>
+              <td>64.72</td>
+              <td class="group-divider">71.91</td>
+              <td>59.91</td>
+              <td>78.15</td>
+              <td>25.00</td>
+              <td>55.43</td>
+            </tr>
+
+            <tr>
+              <td class="rank">11</td>
+              <td class="method model-open">Qwen3-VL-30B-A3B</td>
+              <td class="group-divider">64.63</td>
+              <td>62.44</td>
+              <td>61.06</td>
+              <td>82.16</td>
+              <td class="group-divider">67.88</td>
+              <td>65.15</td>
+              <td>65.86</td>
+              <td>62.50</td>
+              <td class="group-divider">65.49</td>
+              <td>81.89</td>
+              <td>59.09</td>
+              <td>66.94</td>
+              <td class="group-divider">71.47</td>
+              <td>66.52</td>
+              <td>73.11</td>
+              <td>9.05</td>
+              <td>51.10</td>
+            </tr>
+
+            <tr>
+              <td class="rank">12</td>
+              <td class="method model-open">InternVL3.5-14B</td>
+              <td class="group-divider">64.09</td>
+              <td>56.32</td>
+              <td>56.14</td>
+              <td>75.12</td>
+              <td class="group-divider">61.66</td>
+              <td>56.98</td>
+              <td>63.71</td>
+              <td>75.00</td>
+              <td class="group-divider">61.92</td>
+              <td>78.32</td>
+              <td>65.66</td>
+              <td>70.00</td>
+              <td class="group-divider">72.53</td>
+              <td>61.37</td>
+              <td>72.27</td>
+              <td>36.79</td>
+              <td>57.54</td>
+            </tr>
+
+            <tr>
+              <td class="rank">13</td>
+              <td class="method model-open">InternVL3.5-8B</td>
+              <td class="group-divider">64.06</td>
+              <td>56.32</td>
+              <td>61.40</td>
+              <td>70.89</td>
+              <td class="group-divider">61.26</td>
+              <td>54.34</td>
+              <td>67.74</td>
+              <td>68.75</td>
+              <td class="group-divider">63.30</td>
+              <td>80.36</td>
+              <td>66.16</td>
+              <td>67.22</td>
+              <td class="group-divider">72.42</td>
+              <td>66.95</td>
+              <td>73.11</td>
+              <td>25.94</td>
+              <td>56.37</td>
+            </tr>
+
+            <tr>
+              <td class="rank">14</td>
+              <td class="method model-open">InternVL3.5-4B</td>
+              <td class="group-divider">61.95</td>
+              <td>58.71</td>
+              <td>59.65</td>
+              <td>73.24</td>
+              <td class="group-divider">63.00</td>
+              <td>48.30</td>
+              <td>54.44</td>
+              <td>62.50</td>
+              <td class="group-divider">52.71</td>
+              <td>81.63</td>
+              <td>59.60</td>
+              <td>63.06</td>
+              <td class="group-divider">70.00</td>
+              <td>64.81</td>
+              <td>75.63</td>
+              <td>38.21</td>
+              <td>60.32</td>
+            </tr>
+
+            <tr>
+              <td class="rank">15</td>
+              <td class="method model-open">InternVL3.5-2B</td>
+              <td class="group-divider">61.79</td>
+              <td>50.60</td>
+              <td>63.16</td>
+              <td>79.81</td>
+              <td class="group-divider">60.86</td>
+              <td>58.11</td>
+              <td>66.94</td>
+              <td>71.88</td>
+              <td class="group-divider">64.18</td>
+              <td>77.30</td>
+              <td>59.09</td>
+              <td>58.33</td>
+              <td class="group-divider">66.32</td>
+              <td>60.94</td>
+              <td>71.01</td>
+              <td>26.42</td>
+              <td>53.73</td>
+            </tr>
+
+            <tr>
+              <td class="rank">16</td>
+              <td class="method model-open">LLaVA-OneVision-1.5-8B</td>
+              <td class="group-divider">60.81</td>
+              <td>53.94</td>
+              <td>58.77</td>
+              <td>74.65</td>
+              <td class="group-divider">60.59</td>
+              <td>57.36</td>
+              <td>51.61</td>
+              <td>40.62</td>
+              <td class="group-divider">53.09</td>
+              <td>82.14</td>
+              <td>69.19</td>
+              <td>61.94</td>
+              <td class="group-divider">71.79</td>
+              <td>68.67</td>
+              <td>71.01</td>
+              <td>21.23</td>
+              <td>54.76</td>
+            </tr>
+
+            <tr>
+              <td class="rank">17</td>
+              <td class="method model-open">LLaVA-OneVision-1.5-4B</td>
+              <td class="group-divider">60.78</td>
+              <td>55.74</td>
+              <td>54.39</td>
+              <td>72.30</td>
+              <td class="group-divider">60.27</td>
+              <td>61.51</td>
+              <td>55.04</td>
+              <td>40.62</td>
+              <td class="group-divider">56.62</td>
+              <td>81.38</td>
+              <td>61.11</td>
+              <td>61.67</td>
+              <td class="group-divider">69.68</td>
+              <td>63.95</td>
+              <td>73.11</td>
+              <td>21.23</td>
+              <td>53.88</td>
+            </tr>
+
+            <tr>
+              <td class="rank">18</td>
+              <td class="method model-open">InternVL3.5-1B</td>
+              <td class="group-divider">53.91</td>
+              <td>41.77</td>
+              <td>55.26</td>
+              <td>69.95</td>
+              <td class="group-divider">51.88</td>
+              <td>44.91</td>
+              <td>51.21</td>
+              <td>75.00</td>
+              <td class="group-divider">50.06</td>
+              <td>64.29</td>
+              <td>55.56</td>
+              <td>56.94</td>
+              <td class="group-divider">59.68</td>
+              <td>55.36</td>
+              <td>67.65</td>
+              <td>32.55</td>
+              <td>52.56</td>
+            </tr>
+
+            <tr>
+              <td class="rank">19</td>
+              <td class="method model-open">LLaVA-NeXT-Video-7B</td>
+              <td class="group-divider">44.26</td>
+              <td>35.08</td>
+              <td>55.26</td>
+              <td>46.95</td>
+              <td class="group-divider">41.55</td>
+              <td>46.42</td>
+              <td>40.93</td>
+              <td>56.25</td>
+              <td class="group-divider">43.38</td>
+              <td>62.24</td>
+              <td>48.99</td>
+              <td>48.61</td>
+              <td class="group-divider">54.32</td>
+              <td>33.91</td>
+              <td>49.58</td>
+              <td>17.45</td>
+              <td>34.26</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </section>
+
+      <p class="leaderboard-subnote">
+        The table is globally sorted by Mean, while model type is only indicated by method-name color.
+      </p>
+    </div>
+  </div>
+</section>
 
     <!-- Examples -->
     <section class="section is-light" id="examples" style="background: #f8f9fb;">

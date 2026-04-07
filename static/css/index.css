@@ -1205,10 +1205,10 @@ a:focus {
 }
 
 /* =========================
-   Accuracy Leaderboard
+   Leaderboard (compact, globally sorted)
    ========================= */
 #leaderboard .leaderboard-shell {
-  width: 85%;
+  width: 90%;
   max-width: 1500px;
   margin: 0 auto;
 }
@@ -1217,7 +1217,7 @@ a:focus {
   background: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 14px;
-  padding: 24px 28px;
+  padding: 22px 24px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
@@ -1225,16 +1225,18 @@ a:focus {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #2f2f2f;
 }
 
 #leaderboard .leaderboard-note,
-#leaderboard .leaderboard-legend {
-  font-size: 1rem;
-  line-height: 1.6;
+#leaderboard .leaderboard-legend,
+#leaderboard .leaderboard-subnote {
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: #444;
   margin: 8px 0;
+  text-align: center;
 }
 
 #leaderboard .best-demo {
@@ -1266,7 +1268,7 @@ a:focus {
 }
 
 #leaderboard .leaderboard-table-wrap {
-  margin-top: 18px;
+  margin-top: 16px;
   overflow-x: auto;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
@@ -1274,9 +1276,9 @@ a:focus {
 
 #leaderboard .leaderboard-table {
   width: 100%;
-  min-width: 1650px;
   border-collapse: collapse;
-  font-size: 0.92rem;
+  table-layout: auto;
+  font-size: 0.83rem;
   color: #2f2f2f;
   background: #fff;
 }
@@ -1284,7 +1286,7 @@ a:focus {
 #leaderboard .leaderboard-table th,
 #leaderboard .leaderboard-table td {
   border: 1px solid #d8d8d8;
-  padding: 8px 9px;
+  padding: 6px 7px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -1293,27 +1295,28 @@ a:focus {
 #leaderboard .leaderboard-table thead th {
   background: #f5f5f5;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 #leaderboard .leaderboard-table thead tr:first-child th {
-  font-size: 0.95rem;
-}
-
-#leaderboard .leaderboard-table thead tr:nth-child(2) th {
   font-size: 0.88rem;
 }
 
-#leaderboard .leaderboard-table td.method {
-  text-align: left;
-  font-weight: 600;
+#leaderboard .leaderboard-table thead tr:nth-child(2) th {
+  font-size: 0.80rem;
 }
 
-#leaderboard .leaderboard-table .section-row td {
-  background: #efefef;
-  font-style: italic;
-  font-weight: 700;
-  text-align: center;
-  color: #444;
+#leaderboard .leaderboard-table td.method,
+#leaderboard .leaderboard-table th.method-col {
+  text-align: left;
+  font-weight: 600;
+  min-width: 170px;
+}
+
+#leaderboard .leaderboard-table td.rank,
+#leaderboard .leaderboard-table th.rank-col {
+  min-width: 54px;
+  width: 54px;
 }
 
 #leaderboard .leaderboard-table .ref-row {
@@ -1332,47 +1335,37 @@ a:focus {
   text-decoration: underline;
 }
 
-#leaderboard .leaderboard-table .second {
-  font-weight: 700;
-}
-
 #leaderboard .model-proprietary {
-  color: #b35a00;
+  color: #c96a00;
 }
 
 #leaderboard .model-open {
-  color: #2457c5;
-}
-
-#leaderboard .sticky-col {
-  position: sticky;
-  left: 0;
-  background: inherit;
-  z-index: 2;
-}
-
-#leaderboard .sticky-col-2 {
-  position: sticky;
-  left: 58px;
-  background: inherit;
-  z-index: 2;
-}
-
-#leaderboard .leaderboard-table thead .sticky-col,
-#leaderboard .leaderboard-table thead .sticky-col-2 {
-  background: #f5f5f5;
-  z-index: 3;
+  color: #2d5fd0;
 }
 
 #leaderboard .group-divider {
   border-right: 2px solid #cfcfcf !important;
 }
 
-#leaderboard .leaderboard-subnote {
-  text-align: center;
+#leaderboard .group-head {
+  white-space: normal !important;
+  min-width: 92px;
+}
+
+#leaderboard .group-head .abbr {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #333;
+}
+
+#leaderboard .group-head .full {
+  display: block;
+  font-size: 0.70rem;
+  font-weight: 600;
+  line-height: 1.15;
   color: #666;
-  margin-top: 12px;
-  font-size: 0.95rem;
+  margin-top: 2px;
 }
 
 @media screen and (max-width: 768px) {
@@ -1381,20 +1374,30 @@ a:focus {
   }
 
   #leaderboard .leaderboard-card {
-    padding: 18px 14px;
+    padding: 16px 12px;
   }
 
   #leaderboard .leaderboard-title {
-    font-size: 1.55rem;
+    font-size: 1.5rem;
   }
 
   #leaderboard .leaderboard-note,
-  #leaderboard .leaderboard-legend {
-    font-size: 0.92rem;
+  #leaderboard .leaderboard-legend,
+  #leaderboard .leaderboard-subnote {
+    font-size: 0.88rem;
   }
 
   #leaderboard .leaderboard-table {
-    min-width: 1500px;
-    font-size: 0.84rem;
+    font-size: 0.78rem;
+  }
+
+  #leaderboard .leaderboard-table th,
+  #leaderboard .leaderboard-table td {
+    padding: 5px 6px;
+  }
+
+  #leaderboard .leaderboard-table td.method,
+  #leaderboard .leaderboard-table th.method-col {
+    min-width: 150px;
   }
 }
