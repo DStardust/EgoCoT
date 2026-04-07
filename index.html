@@ -786,18 +786,121 @@
         <div class="columns is-centered">
           <div class="column is-11">
             <div class="content">
+              <p>
+                EgoCoT-Bench evaluates not only final answer correctness, but also the quality of
+                the reasoning process and the consistency between them.
+              </p>
               <ul>
-                <li><strong>Accuracy:</strong> standard answer correctness.</li>
-                <li><strong>Reasoning Score (R):</strong> a 0–5 score evaluating logical coherence, factual consistency, and alignment with visual evidence.</li>
+                <li><strong>Accuracy (Acc):</strong> standard answer correctness.</li>
+                <li><strong>Reasoning Score (R):</strong> a 0–5 score evaluating the quality of model-generated reasoning.</li>
                 <li><strong>Spurious Correct Rate (SCR):</strong> the percentage of answer-correct cases with inconsistent underlying reasoning.</li>
               </ul>
 
               <p><strong>Submission format:</strong></p>
-<pre><code>{
-  "qid": "sample_0001",
-  "predicted_answer": "B",
-  "reasoning": "The cap is twisted before the bottle becomes open, so the twisting action causes the state change."
-}</code></pre>
+    <pre><code>{
+      "qid": "sample_0001",
+      "predicted_answer": "B",
+      "reasoning": "The cap is twisted before the bottle becomes open, so the twisting action causes the state change."
+    }</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prompting and Judge -->
+    <section class="section is-light" style="background: #f8f9fb;">
+      <div class="container egocot-text">
+        <h2 class="title is-3 has-text-centered">Prompting Strategy and Reasoning Judge</h2>
+
+        <div class="columns is-centered">
+          <div class="column is-11">
+            <div class="content">
+              <h3 class="title is-5">LLM-Assisted Question Generation</h3>
+              <p>
+                Candidate question-answer pairs are generated from verified spatio-temporal scene graph (STSG)
+                evidence rather than free-form video descriptions. For each subtask, we first traverse
+                task-specific evidence paths to identify grounded targets, associated temporal and spatial cues,
+                interaction relations, and local action history. We then use an LLM to render these verified
+                structural facts into a multiple-choice question, answer options, and step-by-step rationale
+                in a fixed JSON format.
+              </p>
+              <p>
+                Across subtasks, the generation prompts follow a shared principle: each sample must be directly
+                answerable from the provided structured evidence, contain a unique and unambiguous answer,
+                include plausible distractors, and remain traceable to explicit temporal, spatial, and interaction cues.
+                In this way, the LLM serves as a renderer of verified structural evidence rather than a source
+                of unconstrained content invention.
+              </p>
+
+              <p><strong>Generic generation template:</strong></p>
+    <pre><code>You are generating benchmark QA for egocentric video understanding.
+
+    Generate ONE multiple-choice QA pair grounded only in the provided structured egocentric evidence.
+
+    General requirements:
+    1. The question must be answerable using only the provided evidence.
+    2. The answer must be unique and unambiguous.
+    3. Distractors should be plausible but contradicted by the evidence.
+    4. The reasoning must be step-by-step and grounded in timestamps, object states,
+      spatial localization, and interaction relations when available.
+    5. Return valid JSON only.
+
+    Output format:
+    {
+      "question": "...",
+      "choices": {"A": "...", "B": "...", "C": "...", "D": "..."},
+      "answer": "A/B/C/D",
+      "reasoning": {"step1": "...", "step2": "...", "step3": "..."}
+    }</code></pre>
+
+              <h3 class="title is-5" style="margin-top: 2rem;">LLM Judge for Reasoning Quality</h3>
+              <p>
+                We use a separate LLM judge to score model-generated reasoning on a strict 0–5 scale.
+                The judge takes as input the question, the ground-truth answer, the annotated reference reasoning,
+                the predicted answer, and the predicted reasoning. It evaluates the predicted reasoning in terms of
+                logical soundness, coherence, and consistency with the ground-truth answer, and returns a JSON object
+                containing an integer score and a brief explanation.
+              </p>
+              <p>
+                Empty or missing reasoning outputs are assigned a score of 0. In implementation, we use
+                deterministic decoding with temperature set to 0.0 and require strict JSON output.
+              </p>
+
+              <p><strong>Judge prompt:</strong></p>
+    <pre><code>You are an expert evaluator for video question answering reasoning.
+
+    Given:
+    - a question,
+    - the ground-truth answer,
+    - the annotated reference reasoning,
+    - the model-predicted answer, and
+    - the model-predicted reasoning,
+
+    score the predicted reasoning on a strict 0–5 scale.
+
+    Evaluate the reasoning based on:
+    1. logical soundness,
+    2. coherence,
+    3. consistency with the ground-truth answer, and
+    4. whether the reasoning supports the predicted answer in a faithful and non-contradictory manner.
+
+    Scoring rubric:
+    5: logically sound, coherent, and fully supports the correct answer.
+    4: mostly correct and coherent, with only minor redundancy or phrasing issues.
+    3: largely reasonable, but contains minor mistakes or incomplete support.
+    2: partially relevant, but includes major logical flaws or unsupported steps.
+    1: mostly incoherent, weakly relevant, or poorly connected to the answer.
+    0: empty, irrelevant, or fundamentally incorrect.
+
+    Return strict JSON:
+    {
+      "reasoning_score": &lt;0-5 integer&gt;,
+      "analysis": "&lt;brief explanation&gt;"
+    }</code></pre>
+<!-- 
+              <p><strong>Judge system message:</strong></p>
+    <pre><code>You are a precise and objective judge.</code></pre> -->
             </div>
           </div>
         </div>
