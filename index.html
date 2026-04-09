@@ -680,6 +680,66 @@
       </div>
     </section>
 
+    <section id="licensing-access" class="section-block">
+      <div class="section-header">
+        <h2>Licensing &amp; Access</h2>
+        <p>
+          EgoCoT-Bench is released to support research on grounded and verifiable
+          operation-centric reasoning in egocentric video understanding. This section
+          summarizes dataset availability, public access scope, licensing terms, and
+          recommended usage practices for the research community.
+        </p>
+      </div>
+
+      <div class="qa-panel">
+        <h3>Dataset Availability</h3>
+        <p>
+          The dataset is hosted on
+          <a href="https://huggingface.co/datasets/DStardust/EgoCoT-Bench" target="_blank" rel="noopener noreferrer">
+            Hugging Face
+          </a>.
+          The public release includes benchmark annotations and media files required
+          for evaluation and qualitative inspection through the project website and dataset repository.
+        </p>
+      </div>
+
+      <div class="qa-panel">
+        <h3>Public Access Scope</h3>
+        <ul class="qa-list">
+          <li><strong>Public development split:</strong> released for browsing, inspection, and method development.</li>
+          <li><strong>Public test split:</strong> released for benchmarking and submission preparation. Answers not publicly released, to support fair evaluation and prevent label leakage.</li>
+        </ul>
+      </div>
+
+      <div class="qa-panel">
+        <h3>License</h3>
+        <p>
+          EgoCoT-Bench is released under the <strong>Apache-2.0 License</strong>.
+          Users may use, reproduce, and redistribute the released benchmark materials
+          in accordance with the license terms. When using the dataset, please preserve
+          the original copyright and license notices and clearly cite our paper and project page.
+        </p>
+      </div>
+
+      <div class="qa-panel">
+        <h3>Usage Notes</h3>
+        <ul class="qa-list">
+          <li>The dataset is intended for <strong>research purposes</strong> in multimodal reasoning, egocentric video understanding, grounded QA, and evidence-aware evaluation.</li>
+          <li>Users should not misrepresent benchmark annotations as real-world safety guarantees or deploy derived systems in high-stakes settings without additional validation.</li>
+          <li>If you build upon EgoCoT-Bench, please cite the paper and link to the official dataset repository.</li>
+        </ul>
+      </div>
+
+      <div class="qa-panel qa-highlight">
+        <h3>Citation and Contact</h3>
+        <p>
+          If you use EgoCoT-Bench in your research, please cite the accompanying paper.
+          For questions regarding access, annotation format, or benchmark usage, please
+          contact the authors via the email addresses listed on this project page.
+        </p>
+      </div>
+    </section>
+
     <!-- Main results -->
     <section class="section is-light" style="background: #f8f9fb;">
       <div class="container egocot-wide">
@@ -1826,6 +1886,231 @@
       </div>
     </section>
 
+    <section id="annotation-qa" class="section-block">
+      <div class="section-header">
+        <h2>Annotation Quality Assurance</h2>
+        <p>
+          To ensure correctness, egocentric relevance, and evidence-grounded reasoning quality,
+          EgoCoT-Bench adopts a multi-stage annotation and review pipeline. This section reports
+          quantitative statistics for candidate filtering, rejection reasons, agreement, and final quality control.
+        </p>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="qa-cards">
+        <div class="qa-card">
+          <div class="qa-card-label">Initial Candidates</div>
+          <div class="qa-card-value">XXXX</div>
+          <div class="qa-card-desc">STSG-guided candidate QA samples before screening</div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-card-label">Final Accepted Samples</div>
+          <div class="qa-card-value">3172</div>
+          <div class="qa-card-desc">Released benchmark samples after full review</div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-card-label">Overall Retention Rate</div>
+          <div class="qa-card-value">XX.X%</div>
+          <div class="qa-card-desc">Final accepted / initial candidates</div>
+        </div>
+        <div class="qa-card">
+          <div class="qa-card-label">Human Reviewers</div>
+          <div class="qa-card-value">4 + 1</div>
+          <div class="qa-card-desc">4 annotators for screening, 1 lead reviewer for adjudication</div>
+        </div>
+      </div>
+
+      <!-- Pipeline Table
+      <div class="qa-panel">
+        <h3>Multi-stage Filtering Statistics</h3>
+        <div class="table-wrap">
+          <table class="qa-table">
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Input</th>
+                <th>Accepted</th>
+                <th>Rejected</th>
+                <th>Retention</th>
+                <th>Main Check</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Stage 1: Candidate Generation</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Rule validity, answerability, basic evidence completeness</td>
+              </tr>
+              <tr>
+                <td>Stage 2: Initial Human Screening</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Egocentric relevance, semantic correctness, distractor quality</td>
+              </tr>
+              <tr>
+                <td>Stage 3: Cross Review</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Temporal grounding, spatial grounding, rationale quality</td>
+              </tr>
+              <tr>
+                <td>Stage 4: Lead Reviewer Adjudication</td>
+                <td>XXXX</td>
+                <td>3172</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Conflict resolution, consistency check, final normalization</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="qa-note">
+          The final released benchmark contains <strong>3,172</strong> QA pairs after multi-stage quality control.
+        </p>
+      </div> -->
+
+      <!-- Rejection Reasons
+      <div class="qa-panel">
+        <h3>Primary Rejection Reasons</h3>
+        <div class="table-wrap">
+          <table class="qa-table">
+            <thead>
+              <tr>
+                <th>Reason</th>
+                <th>Count</th>
+                <th>Ratio</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ambiguous target / answer</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Multiple plausible targets or insufficient disambiguation</td>
+              </tr>
+              <tr>
+                <td>Weak egocentric relevance</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Question can be answered without meaningful first-person reasoning</td>
+              </tr>
+              <tr>
+                <td>Insufficient temporal evidence</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Required temporal trace is incomplete or not recoverable</td>
+              </tr>
+              <tr>
+                <td>Insufficient spatial grounding</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Object localization or interaction evidence is unreliable</td>
+              </tr>
+              <tr>
+                <td>Low rationale quality</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Reasoning steps are incomplete, redundant, or unsupported</td>
+              </tr>
+              <tr>
+                <td>Poor distractor design</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+                <td>Incorrect options are too easy, implausible, or inconsistent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
+      <!-- Agreement Stats
+      <div class="qa-panel">
+        <h3>Annotation Agreement and Review Consistency</h3>
+        <div class="qa-grid-two">
+          <div class="qa-subpanel">
+            <h4>Inter-Annotator Review Statistics</h4>
+            <ul class="qa-list">
+              <li><strong>Double-reviewed samples:</strong> XXXX</li>
+              <li><strong>Initial agreement rate:</strong> XX.X%</li>
+              <li><strong>Conflict rate requiring adjudication:</strong> XX.X%</li>
+              <li><strong>Post-adjudication resolution rate:</strong> 100%</li>
+            </ul>
+          </div>
+          <div class="qa-subpanel">
+            <h4>Quality Dimensions Checked</h4>
+            <ul class="qa-list">
+              <li>Semantic correctness of question-answer pairs</li>
+              <li>Egocentric relevance of the reasoning target</li>
+              <li>Temporal faithfulness to video evidence</li>
+              <li>Spatial grounding correctness</li>
+              <li>Step-by-step rationale completeness and support</li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Per-Group Optional
+      <div class="qa-panel">
+        <h3>Optional: Acceptance Statistics by Task Group</h3>
+        <div class="table-wrap">
+          <table class="qa-table">
+            <thead>
+              <tr>
+                <th>Task Group</th>
+                <th>Candidate Count</th>
+                <th>Accepted Count</th>
+                <th>Retention</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Egocentric Grounding &amp; Perception</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+              </tr>
+              <tr>
+                <td>Spatio-Temporal Retrospection</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+              </tr>
+              <tr>
+                <td>Predictive &amp; Causal Inference</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+              </tr>
+              <tr>
+                <td>High-level Grounded Reasoning</td>
+                <td>XXXX</td>
+                <td>XXXX</td>
+                <td>XX.X%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
+      <!-- Final Statement -->
+      <div class="qa-panel qa-highlight">
+        <h3>Final Quality Control Summary</h3>
+        <p>
+          Overall, EgoCoT-Bench was finalized through a structured human-in-the-loop review process
+          that filters out ambiguous, weakly grounded, or low-quality samples. The released benchmark
+          prioritizes answer correctness, egocentric relevance, temporal and spatial grounding fidelity,
+          and rationale verifiability.
+        </p>
+      </div>
+    </section>
     <!-- Demo videos
     <section class="section">
       <div class="container egocot-wide">

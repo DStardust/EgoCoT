@@ -1402,3 +1402,145 @@ a:focus {
   }
 }
 
+  .section-block {
+    margin: 72px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #555;
+    max-width: 900px;
+  }
+
+  .qa-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 28px 0 24px;
+  }
+
+  .qa-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  }
+
+  .qa-card-label {
+    font-size: 0.92rem;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  .qa-card-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+  }
+
+  .qa-card-desc {
+    font-size: 0.92rem;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .qa-panel {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  }
+
+  .qa-panel h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .qa-subpanel h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .qa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .qa-table th,
+  .qa-table td {
+    border-bottom: 1px solid #ececec;
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .qa-table th {
+    background: #fafafa;
+    font-weight: 600;
+    color: #222;
+  }
+
+  .qa-note {
+    margin-top: 14px;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .qa-grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .qa-subpanel {
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .qa-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #555;
+    line-height: 1.75;
+  }
+
+  .qa-highlight {
+    background: #fcfcff;
+    border-color: #dfe5ff;
+  }
+
+  @media (max-width: 900px) {
+    .qa-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .qa-grid-two {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .qa-cards {
+      grid-template-columns: 1fr;
+    }
+  }
