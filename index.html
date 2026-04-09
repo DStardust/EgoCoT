@@ -2113,8 +2113,10 @@
         <div class="content has-text-centered">
           <p>
             Fine-grained benchmark results on EgoCoT-Bench. The figure summarizes subtask-level answer accuracy,
-            group-wise reasoning quality using Reasoning Score (R) and inverted SCR, and the agreement between
-            LLM-based judgment and human consensus.
+            group-wise reasoning quality using Reasoning Score (R) and inverted SCR. To assess the reliability of the reasoning judge, we compare LLM-based scoring against human evaluation
+  on 2,800 randomly sampled responses. The LLM judge shows strong alignment with human assessment,
+  achieving a high quadratic weighted kappa (QWK = 0.93), 96.7% agreement within &plusmn;1 score,
+  and 75.3% exact agreement.
           </p>
         </div>
 
