@@ -314,71 +314,67 @@
     const quizExamples = [
       {
         group: "Egocentric Grounding & Perception",
-        subtask: "Active Object Grounding",
+        subtask: "Hand-Object Association",
         video: "static/videos/quiz_egp.mp4",
-        question: "At 00:01.0, which operator body part is actively holding the black pot near the sink?",
+        question: "At time 00:28.00, which object is the operator's left hand in direct physical contact with?",
         choices: {
-          A: "right hand",
-          B: "left hand",
-          C: "chin",
-          D: "forehead"
+          A: "bowl",
+          B: "pot",
+          C: "pan",
+          D: "box"
         },
-        answer: "B",
-        answerText: "left hand",
-        timestamps: "00:01.00",
-        reasoning: "At the queried moment, the target appears in the lower-left region with evidence consistent with the operator's left hand in egocentric view. The left hand is the body part directly holding the pot.",
-        evidence: "Focused bbox on the left hand and explicit interaction evidence linking the left hand to the pot."
+        answer: "D",
+        answerText: "box",
+        timestamps: "00:28.00",
+        reasoning: "Among matching entries, only one states explicit direct contact at 00:28.00: 'predicate': 'touching', 'hand_name': 'left hand', 'object_name': 'box', 'object_distinct_label': 16. Another entry at the same time confirms 'touched by' the left hand, and the object_feature explicitly includes '[in contact with: hand]'. No other object has a direct-contact predicate (e.g., 'touching', 'holding', 'in contact with') at 00:28.00 for the left hand."
       },
       {
         group: "Spatio-Temporal Retrospection",
         subtask: "Location / Visibility Retrospection",
         video: "static/videos/quiz_str.mp4",
-        question: "Before the current moment, where was the blue bottle relative to the operator's field of view?",
+        question: "At 00:09.75, was the right hand in view and where was it located relative to the egocentric frame?",
         choices: {
-          A: "On the left side of the table",
-          B: "Inside the sink",
-          C: "Out of view",
-          D: "In the operator's right hand"
+          A: "Out of view — not detectable in the frame",
+          B: "Upper right of view — near the black wheel",
+          C: "Lower right of view — near the toy assembly instruction sheet",
+          D: "Middle of view — interacting with paper"
         },
-        answer: "C",
-        answerText: "Out of view",
-        timestamps: "00:03.20–00:05.10",
-        reasoning: "Earlier frames do not show the blue bottle within the visible workspace. It only appears later when brought into view, so the earlier state is out of view.",
-        evidence: "Retrospective visibility evidence from preceding frames and absence of the target bottle in the earlier visible region."
+        answer: "B",
+        answerText: "Upper right of view — near the black wheel",
+        timestamps: "00:09.75",
+        reasoning: "The structured records explicitly list 'right hand' with a time_and_position entry for '00:09.75', stating 'position': 'upper right of view' and 'bbox': [286, 0, 363, 123], confirming it was in view. The attributes associated with the same temporal segment (00:09.75–00:11.50) include 'position': 'near a black wheel', which is directly linked to that early time window and grounded in the records."
       },
       {
         group: "Predictive & Causal Inference",
         subtask: "Local Cause-Outcome Inference",
         video: "static/videos/quiz_pci.mp4",
-        question: "Which recent action most directly caused the bottle to become open?",
+        question: "Which recent action directly caused a pizza slice to separate from the main portion on the plate?",
         choices: {
-          A: "Moving the bottle to the table",
-          B: "Twisting the cap counterclockwise",
-          C: "Touching the bottle neck",
-          D: "Lifting the bottle upright"
+          A: "The operator holds a plate with pizza, moves it across the kitchen, and places it on the countertop near a rice cooker.",
+          B: "The operator uses their right hand to hold a knife and cuts the pizza on the plate, then lifts a slice with the knife while holding the plate steady with their left hand.",
+          C: "The operator uses a knife in their right hand to cut the pizza on the plate, causing a slice to separate.",
+          D: "The operator uses a knife in their right hand to cut the pizza on the plate, while their left hand steadies the plate, causing the pizza to be sliced into portions."
         },
-        answer: "B",
-        answerText: "Twisting the cap counterclockwise",
-        timestamps: "00:05.20–00:07.40",
-        reasoning: "The cap is grasped and rotated before the bottle changes from closed to open. This twisting action is the immediate local cause of the observed state change.",
-        evidence: "Temporal ordering of grasp → rotate → open, together with localized hand-object interaction evidence on the cap."
+        answer: "C",
+        answerText: "The operator uses a knife in their right hand to cut the pizza on the plate, causing a slice to separate.",
+        timestamps: "00:30.00–00:30.25",
+        reasoning: "The outcome is local and near-term: 'a pizza slice to separate from the main portion on the plate' — this is a discrete, immediate physical change observed at ~30.25 s, matching the description in the 00:30.00–00:30.25 action. Choice C explicitly matches the action timestamp (00:30.00–00:30.25) and verbatim describes the causal mechanism: 'uses a knife in their right hand to cut the pizza on the plate, causing a slice to separate' — the verb 'causing' directly links the action to the specified outcome. While B and D involve cutting and occur close in time, B occurs at 00:29.25–00:30.00 (immediately before) and describes lifting *after* cutting, not separation *caused by* that cut; D spans 00:30.25–00:31.75 and describes generalized slicing into portions, not the *initial separation event*."
       },
       {
         group: "High-level Grounded Reasoning",
-        subtask: "Goal-Oriented Object Tracking",
+        subtask: "Progress Reasoning",
         video: "static/videos/quiz_hgr.mp4",
-        question: "Which object is being retained for the next procedural step in the current manipulation goal?",
+        question: "Based on the egocentric video segment (00:04.25–00:41.75), which embodied manipulation step has already been completed with respect to the orange plastic bag, using body-part-centered reasoning?",
         choices: {
-          A: "The empty box",
-          B: "The towel",
-          C: "The screwdriver",
-          D: "The bottle cap"
+          A: "The left hand has fully unfolded and flattened the plastic bag on the countertop.",
+          B: "The hands have grasped and stretched the plastic bag to elongate and flatten it from its crumpled state.",
+          C: "The left hand has reattached the plastic bag to the door hook.",
+          D: "The hands have lifted the plastic bag off the hook but not yet opened it."
         },
-        answer: "C",
-        answerText: "The screwdriver",
-        timestamps: "00:12.10–00:17.60",
-        reasoning: "Although multiple objects are visible, only the screwdriver remains functionally relevant across consecutive steps and is carried forward as the next tool needed for the task.",
-        evidence: "Cross-frame track continuity and goal-oriented relevance of the screwdriver in the local manipulation sequence."
+        answer: "B",
+        answerText: "The hands have grasped and stretched the plastic bag to elongate and flatten it from its crumpled state.",
+        timestamps: "00:04.25–00:41.75",
+        reasoning: "From 00:14.00–00:15.00 and repeated across multiple time windows (e.g., 00:14.00–00:18.00, 00:19.00–00:21.00), the evidence states: 'The hands are firmly grasping and stretching the orange plastic bag, causing it to deform and change shape as it is being opened or adjusted' and 'stretching it open to reveal its full size and shape'. This confirms active, body-part-centered manipulation involving both hands applying force to stretch and elongate the bag.\nAt 00:26.25–00:29.25, the action explicitly states: 'The operator's hands firmly grasp and unfold the plastic bag, then place it flat on the countertop.' However, this occurs *after* the stretching phase — and crucially, the 'placing flat' is described as a subsequent outcome of unfolding, not yet completed by the end of the segment (which ends at 00:41.75 but last relevant bag action timestamps cap at 00:31.25 with folding/compact shaping). So A is premature — 'fully unfolded and flattened' is not confirmed as *completed and stable*; the bag undergoes further folding (00:23.25–00:31.25). C is contradicted: the bag was *removed* from the hook starting at 00:04.25 ('grasps... lifting it slightly from the hook'), carried away (00:09.00–00:11.00), and never rehung — instead manipulated on the countertop. D is false: the bag was not only lifted off the hook but repeatedly *opened*, stretched, and unfolded well before 00:09.00 — e.g., 'grasp and open... pulling it apart to reveal contents' at 00:05.00–00:06.00. Thus, B is the only step definitively completed and consistently evidenced via hand actions across multiple overlapping time intervals."
       }
     ];
 
@@ -391,7 +387,6 @@
     const quizOptions = document.getElementById("quiz-options");
     const quizTime = document.getElementById("quiz-time");
     const quizReasoning = document.getElementById("quiz-reasoning");
-    const quizEvidence = document.getElementById("quiz-evidence");
     const quizDetail = document.getElementById("quiz-detail");
     const quizExtra = document.getElementById("quiz-extra");
     const quizToggleDetail = document.getElementById("quiz-toggle-detail");
@@ -428,7 +423,6 @@
       quizQuestion.textContent = ex.question;
       quizTime.textContent = ex.timestamps;
       quizReasoning.textContent = ex.reasoning;
-      quizEvidence.textContent = ex.evidence;
 
       if (quizVideoSource) {
         quizVideoSource.src = ex.video;
@@ -1890,11 +1884,11 @@
                   </div>
 
                   <h3 class="egocot-quiz-subtask" id="quiz-subtask">
-                    Active Object Grounding
+                    Hand-Object Association
                   </h3>
 
                   <div class="egocot-quiz-question" id="quiz-question">
-                    At 00:01.0, which operator body part is actively holding the black pot near the sink?
+                    At time 00:28.00, which object is the operator's left hand in direct physical contact with?
                   </div>
 
                   <div class="egocot-quiz-options" id="quiz-options"></div>
@@ -1922,10 +1916,6 @@
                       <div class="egocot-quiz-detail-block">
                         <h4>Reasoning</h4>
                         <p id="quiz-reasoning"></p>
-                      </div>
-                      <div class="egocot-quiz-detail-block">
-                        <h4>Evidence</h4>
-                        <p id="quiz-evidence"></p>
                       </div>
                     </div>
                   </div>
