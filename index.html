@@ -309,6 +309,204 @@
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const quizExamples = [
+      {
+        group: "Egocentric Grounding & Perception",
+        subtask: "Active Object Grounding",
+        video: "static/videos/quiz_egp.mp4",
+        question: "At 00:01.0, which operator body part is actively holding the black pot near the sink?",
+        choices: {
+          A: "right hand",
+          B: "left hand",
+          C: "chin",
+          D: "forehead"
+        },
+        answer: "B",
+        answerText: "left hand",
+        timestamps: "00:01.00",
+        reasoning: "At the queried moment, the target appears in the lower-left region with evidence consistent with the operator's left hand in egocentric view. The left hand is the body part directly holding the pot.",
+        evidence: "Focused bbox on the left hand and explicit interaction evidence linking the left hand to the pot."
+      },
+      {
+        group: "Spatio-Temporal Retrospection",
+        subtask: "Location / Visibility Retrospection",
+        video: "static/videos/quiz_str.mp4",
+        question: "Before the current moment, where was the blue bottle relative to the operator's field of view?",
+        choices: {
+          A: "On the left side of the table",
+          B: "Inside the sink",
+          C: "Out of view",
+          D: "In the operator's right hand"
+        },
+        answer: "C",
+        answerText: "Out of view",
+        timestamps: "00:03.20–00:05.10",
+        reasoning: "Earlier frames do not show the blue bottle within the visible workspace. It only appears later when brought into view, so the earlier state is out of view.",
+        evidence: "Retrospective visibility evidence from preceding frames and absence of the target bottle in the earlier visible region."
+      },
+      {
+        group: "Predictive & Causal Inference",
+        subtask: "Local Cause-Outcome Inference",
+        video: "static/videos/quiz_pci.mp4",
+        question: "Which recent action most directly caused the bottle to become open?",
+        choices: {
+          A: "Moving the bottle to the table",
+          B: "Twisting the cap counterclockwise",
+          C: "Touching the bottle neck",
+          D: "Lifting the bottle upright"
+        },
+        answer: "B",
+        answerText: "Twisting the cap counterclockwise",
+        timestamps: "00:05.20–00:07.40",
+        reasoning: "The cap is grasped and rotated before the bottle changes from closed to open. This twisting action is the immediate local cause of the observed state change.",
+        evidence: "Temporal ordering of grasp → rotate → open, together with localized hand-object interaction evidence on the cap."
+      },
+      {
+        group: "High-level Grounded Reasoning",
+        subtask: "Goal-Oriented Object Tracking",
+        video: "static/videos/quiz_hgr.mp4",
+        question: "Which object is being retained for the next procedural step in the current manipulation goal?",
+        choices: {
+          A: "The empty box",
+          B: "The towel",
+          C: "The screwdriver",
+          D: "The bottle cap"
+        },
+        answer: "C",
+        answerText: "The screwdriver",
+        timestamps: "00:12.10–00:17.60",
+        reasoning: "Although multiple objects are visible, only the screwdriver remains functionally relevant across consecutive steps and is carried forward as the next tool needed for the task.",
+        evidence: "Cross-frame track continuity and goal-oriented relevance of the screwdriver in the local manipulation sequence."
+      }
+    ];
+
+    const quizTabs = document.querySelectorAll(".egocot-quiz-tab");
+    const quizVideo = document.getElementById("quiz-video");
+    const quizVideoSource = document.getElementById("quiz-video-source");
+    const quizGroup = document.getElementById("quiz-group");
+    const quizSubtask = document.getElementById("quiz-subtask");
+    const quizQuestion = document.getElementById("quiz-question");
+    const quizOptions = document.getElementById("quiz-options");
+    const quizTime = document.getElementById("quiz-time");
+    const quizReasoning = document.getElementById("quiz-reasoning");
+    const quizEvidence = document.getElementById("quiz-evidence");
+    const quizDetail = document.getElementById("quiz-detail");
+    const quizExtra = document.getElementById("quiz-extra");
+    const quizToggleDetail = document.getElementById("quiz-toggle-detail");
+    const quizResult = document.getElementById("quiz-result");
+    const quizResultLabel = document.getElementById("quiz-result-label");
+    const quizResultAnswer = document.getElementById("quiz-result-answer");
+
+    let currentQuizIndex = 0;
+    let detailShown = false;
+    let answered = false;
+
+    function resetQuizState() {
+      answered = false;
+      detailShown = false;
+      quizResult.classList.remove("show");
+      quizResultLabel.textContent = "";
+      quizResultLabel.className = "quiz-result-label";
+      quizResultAnswer.textContent = "";
+      quizExtra.classList.remove("show");
+      quizDetail.classList.remove("show");
+      quizToggleDetail.textContent = "Show Reasoning & Evidence";
+    }
+
+    function renderQuizExample(index) {
+      const ex = quizExamples[index];
+      currentQuizIndex = index;
+
+      quizTabs.forEach(tab => tab.classList.remove("active"));
+      const activeTab = document.querySelector('.egocot-quiz-tab[data-example="' + index + '"]');
+      if (activeTab) activeTab.classList.add("active");
+
+      quizGroup.textContent = ex.group;
+      quizSubtask.textContent = ex.subtask;
+      quizQuestion.textContent = ex.question;
+      quizTime.textContent = ex.timestamps;
+      quizReasoning.textContent = ex.reasoning;
+      quizEvidence.textContent = ex.evidence;
+
+      if (quizVideoSource) {
+        quizVideoSource.src = ex.video;
+        quizVideo.load();
+      }
+
+      quizOptions.innerHTML = "";
+      Object.entries(ex.choices).forEach(([letter, text]) => {
+        const option = document.createElement("div");
+        option.className = "egocot-quiz-option";
+        option.dataset.letter = letter;
+        option.innerHTML = '<span class="option-letter">' + letter + '</span>' + text;
+        option.addEventListener("click", function () {
+          handleAnswer(letter);
+        });
+        quizOptions.appendChild(option);
+      });
+
+      resetQuizState();
+    }
+
+    function handleAnswer(selectedLetter) {
+      if (answered) return;
+      answered = true;
+
+      const ex = quizExamples[currentQuizIndex];
+      const options = document.querySelectorAll(".egocot-quiz-option");
+
+      options.forEach(opt => {
+        const letter = opt.dataset.letter;
+        if (letter === selectedLetter && letter === ex.answer) {
+          opt.classList.add("selected-correct", "correct-answer");
+        } else if (letter === selectedLetter && letter !== ex.answer) {
+          opt.classList.add("selected-wrong");
+        } else if (letter === ex.answer) {
+          opt.classList.add("correct-answer");
+        }
+      });
+
+      if (selectedLetter === ex.answer) {
+        quizResultLabel.textContent = "Correct! 🎉";
+        quizResultLabel.classList.add("correct");
+      } else {
+        quizResultLabel.textContent = "Incorrect!";
+        quizResultLabel.classList.add("incorrect");
+      }
+
+      quizResultAnswer.textContent = "The correct answer is " + ex.answer + ". " + ex.answerText + ".";
+      quizResult.classList.add("show");
+      quizExtra.classList.add("show");
+    }
+
+    function toggleQuizDetail() {
+      if (!answered) return;
+      detailShown = !detailShown;
+      if (detailShown) {
+        quizDetail.classList.add("show");
+        quizToggleDetail.textContent = "Hide Reasoning & Evidence";
+      } else {
+        quizDetail.classList.remove("show");
+        quizToggleDetail.textContent = "Show Reasoning & Evidence";
+      }
+    }
+
+    quizTabs.forEach(tab => {
+      tab.addEventListener("click", function () {
+        renderQuizExample(parseInt(this.dataset.example, 10));
+      });
+    });
+
+    if (quizToggleDetail) {
+      quizToggleDetail.addEventListener("click", toggleQuizDetail);
+    }
+
+    renderQuizExample(0);
+  });
+</script>
+
 <body>
 
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -1652,42 +1850,90 @@
         }
       }
     </style>
+
     <!-- Examples -->
     <section class="section is-light" id="examples" style="background: #f8f9fb;">
-      <div class="container egocot-text">
-        <h2 class="title is-3 has-text-centered">Browsable Examples</h2>
+      <div class="container egocot-wide">
+        <h2 class="title is-3 has-text-centered">Quiz</h2>
 
-        <div class="columns is-multiline">
-          <div class="column is-6">
-            <div class="box">
-              <video controls preload="metadata" style="width: 100%; border-radius: 10px;">
-                <source src="static/videos/example1.mp4" type="video/mp4">
-              </video>
-              <div class="content" style="margin-top: 1rem;">
-                <p><strong>Task:</strong> Local Cause-Outcome Inference</p>
-                <p><strong>Question:</strong> Which recent action most directly caused the observed local outcome?</p>
-                <p><strong>Answer:</strong> B</p>
-                <p><strong>Rationale:</strong> The operator first grasps the cap, rotates it, and then the bottle becomes open. The twisting action most directly explains the state change.</p>
-                <p><strong>Timestamps:</strong> 00:05.2–00:07.4</p>
-                <p><strong>Evidence:</strong> Add one or two evidence frames with bbox below if needed.</p>
+        <div class="egocot-quiz-shell">
+          <div class="egocot-quiz-card">
+
+            <div class="egocot-quiz-tabs">
+              <button class="egocot-quiz-tab active" data-example="0">
+                Egocentric Grounding &amp; Perception
+              </button>
+              <button class="egocot-quiz-tab" data-example="1">
+                Spatio-Temporal Retrospection
+              </button>
+              <button class="egocot-quiz-tab" data-example="2">
+                Predictive &amp; Causal Inference
+              </button>
+              <button class="egocot-quiz-tab" data-example="3">
+                High-level Grounded Reasoning
+              </button>
+            </div>
+
+            <div class="columns is-variable is-6 egocot-quiz-body">
+              <div class="column is-6">
+                <div class="egocot-quiz-media-wrap">
+                  <video id="quiz-video" class="egocot-quiz-video" controls preload="metadata" playsinline>
+                    <source id="quiz-video-source" src="static/videos/quiz_egp.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+
+              <div class="column is-6">
+                <div class="egocot-quiz-panel">
+                  <div class="egocot-quiz-group" id="quiz-group">
+                    Egocentric Grounding &amp; Perception
+                  </div>
+
+                  <h3 class="egocot-quiz-subtask" id="quiz-subtask">
+                    Active Object Grounding
+                  </h3>
+
+                  <div class="egocot-quiz-question" id="quiz-question">
+                    At 00:01.0, which operator body part is actively holding the black pot near the sink?
+                  </div>
+
+                  <div class="egocot-quiz-options" id="quiz-options"></div>
+
+                  <div class="egocot-quiz-result" id="quiz-result">
+                    <div class="quiz-result-label" id="quiz-result-label"></div>
+                    <div class="quiz-result-answer" id="quiz-result-answer"></div>
+                  </div>
+
+                  <div class="egocot-quiz-extra" id="quiz-extra">
+                    <div class="egocot-quiz-meta">
+                      <div class="egocot-quiz-meta-item">
+                        <span class="meta-label">Timestamps</span>
+                        <span class="meta-value" id="quiz-time">00:01.00</span>
+                      </div>
+                    </div>
+
+                    <div class="egocot-quiz-actions">
+                      <button id="quiz-toggle-detail" class="button is-dark is-rounded is-small">
+                        Show Reasoning &amp; Evidence
+                      </button>
+                    </div>
+
+                    <div class="egocot-quiz-detail" id="quiz-detail">
+                      <div class="egocot-quiz-detail-block">
+                        <h4>Reasoning</h4>
+                        <p id="quiz-reasoning"></p>
+                      </div>
+                      <div class="egocot-quiz-detail-block">
+                        <h4>Evidence</h4>
+                        <p id="quiz-evidence"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="column is-6">
-            <div class="box">
-              <video controls preload="metadata" style="width: 100%; border-radius: 10px;">
-                <source src="static/videos/example2.mp4" type="video/mp4">
-              </video>
-              <div class="content" style="margin-top: 1rem;">
-                <p><strong>Task:</strong> Goal-Oriented Object Tracking</p>
-                <p><strong>Question:</strong> Which object is being retained for the next procedural step?</p>
-                <p><strong>Answer:</strong> C</p>
-                <p><strong>Rationale:</strong> Although multiple objects appear, only one remains functionally relevant to the next manipulation goal and is carried across interaction steps.</p>
-                <p><strong>Timestamps:</strong> 00:12.1–00:17.6</p>
-                <p><strong>Evidence:</strong> Add highlighted trajectory frames here.</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1900,17 +2146,17 @@
       <div class="qa-cards">
         <div class="qa-card">
           <div class="qa-card-label">Initial Candidates</div>
-          <div class="qa-card-value">XXXX</div>
+          <div class="qa-card-value">4,300</div>
           <div class="qa-card-desc">STSG-guided candidate QA samples before screening</div>
         </div>
         <div class="qa-card">
           <div class="qa-card-label">Final Accepted Samples</div>
-          <div class="qa-card-value">3172</div>
+          <div class="qa-card-value">3,172</div>
           <div class="qa-card-desc">Released benchmark samples after full review</div>
         </div>
         <div class="qa-card">
           <div class="qa-card-label">Overall Retention Rate</div>
-          <div class="qa-card-value">XX.X%</div>
+          <div class="qa-card-value">73.8%</div>
           <div class="qa-card-desc">Final accepted / initial candidates</div>
         </div>
         <div class="qa-card">
