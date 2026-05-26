@@ -145,7 +145,7 @@
     "abstract": "FULL_ABSTRACT_TEXT_HERE",
     "citation": "BIBTEX_CITATION_HERE",
     "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "license": "https://creativecommons.org/licenses/by-nc/4.0/",
     "mainEntity": {
       "@type": "WebPage",
       "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
@@ -878,47 +878,97 @@
         <p>
           EgoCoT-Bench is released to support research on grounded and verifiable
           operation-centric reasoning in egocentric video understanding. This section
-          summarizes dataset availability, public access scope, licensing terms, and
-          recommended usage practices for the research community.
+          clarifies dataset availability, public access scope, layered licensing terms,
+          and responsible usage practices for the research community.
         </p>
       </div>
 
       <div class="qa-panel">
         <h3>Dataset Availability</h3>
         <p>
-          The dataset is hosted on
+          The benchmark annotations and metadata are hosted on
           <a href="https://huggingface.co/datasets/DStardust/EgoCoT-Bench" target="_blank" rel="noopener noreferrer">
             Hugging Face
           </a>.
-          The public release includes benchmark annotations and media files required
-          for evaluation and qualitative inspection through the project website and dataset repository.
+          The public release provides the materials needed for benchmark evaluation,
+          qualitative inspection, and reproducible comparison, including sample-level
+          task labels, questions, answer choices, rationales where public, temporal
+          anchors, bounding boxes, and interaction evidence where applicable.
+          Third-party raw videos are not re-licensed by EgoCoT-Bench and remain subject
+          to the access rules of their original source datasets.
         </p>
       </div>
 
       <div class="qa-panel">
         <h3>Public Access Scope</h3>
         <ul class="qa-list">
-          <li><strong>Public development split:</strong> released for browsing, inspection, and method development.</li>
-          <li><strong>Public test split:</strong> released for benchmarking and submission preparation. Answers not publicly released, to support fair evaluation and prevent label leakage.</li>
+          <li><strong>Public development split:</strong> released for browsing, inspection, method development, and qualitative analysis. Public development examples may include answers, rationales, and evidence metadata.</li>
+          <li><strong>Public test split:</strong> released for benchmarking and submission preparation. Answers and private rationales are not publicly released, to support fair evaluation and prevent label leakage.</li>
+          <li><strong>Media access:</strong> videos derived from third-party datasets should be accessed and used according to the corresponding source dataset licenses and terms of use.</li>
         </ul>
       </div>
 
       <div class="qa-panel">
         <h3>License</h3>
         <p>
-          EgoCoT-Bench is released under the <strong>Apache-2.0 License</strong>.
-          Users may use, reproduce, and redistribute the released benchmark materials
-          in accordance with the license terms. When using the dataset, please preserve
-          the original copyright and license notices and clearly cite our paper and project page.
+          EgoCoT-Bench uses a <strong>layered license</strong> to distinguish our
+          benchmark annotations from third-party video sources and evaluation code:
         </p>
+        <ul class="qa-list">
+          <li>
+            <strong>Annotations and benchmark metadata:</strong>
+            questions, answer choices, rationales, task labels, temporal anchors,
+            bounding boxes, interaction relations, and other EgoCoT-Bench metadata
+            are released for research and non-commercial use under the
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">
+              Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)
+            </a>.
+          </li>
+          <li>
+            <strong>Evaluation code and leaderboard utilities:</strong>
+            data loading scripts, evaluation scripts, and leaderboard utilities are
+            released under the <strong>Apache License 2.0</strong>, unless otherwise
+            specified in the corresponding repository files.
+          </li>
+          <li>
+            <strong>Raw videos:</strong>
+            videos derived from Ego4D, EPIC-KITCHENS, Charades-Ego, MECCANO,
+            HD-EPIC, and other third-party sources remain governed by their original
+            licenses and terms of use. EgoCoT-Bench does not re-license those raw
+            videos. Users are responsible for obtaining and using the original media
+            according to the corresponding source dataset terms.
+          </li>
+          <li>
+            <strong>Self-recorded videos:</strong>
+            self-recorded media, where provided, are released for research and
+            non-commercial use under CC BY-NC 4.0, subject to the consent and privacy
+            constraints described on this project page and in the dataset repository.
+          </li>
+        </ul>
+      </div>
+
+      <div class="qa-panel">
+        <h3>Third-Party Source Terms</h3>
+        <p>
+          EgoCoT-Bench builds on multiple egocentric video sources. The benchmark
+          annotations are released by EgoCoT-Bench, while the underlying source videos
+          remain subject to the licenses, access agreements, and redistribution policies
+          of their original providers.
+        </p>
+        <ul class="qa-list">
+          <li><strong>Ego4D / EPIC-KITCHENS / Charades-Ego / MECCANO / HD-EPIC:</strong> users should follow the official access and license terms of each source dataset.</li>
+          <li><strong>Redistribution:</strong> users should not redistribute third-party raw videos through EgoCoT-Bench unless such redistribution is explicitly permitted by the original source license.</li>
+          <li><strong>Attribution:</strong> users should cite both EgoCoT-Bench and the relevant original video datasets when using samples derived from those sources.</li>
+        </ul>
       </div>
 
       <div class="qa-panel">
         <h3>Usage Notes</h3>
         <ul class="qa-list">
-          <li>The dataset is intended for <strong>research purposes</strong> in multimodal reasoning, egocentric video understanding, grounded QA, and evidence-aware evaluation.</li>
+          <li>The benchmark is intended for <strong>research and non-commercial purposes</strong> in multimodal reasoning, egocentric video understanding, grounded QA, and evidence-aware evaluation.</li>
           <li>Users should not misrepresent benchmark annotations as real-world safety guarantees or deploy derived systems in high-stakes settings without additional validation.</li>
-          <li>If you build upon EgoCoT-Bench, please cite the paper and link to the official dataset repository.</li>
+          <li>Users should not use EgoCoT-Bench to identify private individuals or infer sensitive personal attributes from video content.</li>
+          <li>If you build upon EgoCoT-Bench, please cite the paper, link to the official dataset repository, and cite the relevant source video datasets.</li>
         </ul>
       </div>
 
@@ -926,8 +976,8 @@
         <h3>Citation and Contact</h3>
         <p>
           If you use EgoCoT-Bench in your research, please cite the accompanying paper.
-          For questions regarding access, annotation format, or benchmark usage, please
-          contact the authors via the email addresses listed on this project page.
+          For questions regarding access, annotation format, licensing, or benchmark usage,
+          please contact the authors via the email addresses listed on this project page.
         </p>
       </div>
     </section>
