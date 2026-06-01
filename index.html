@@ -1930,6 +1930,441 @@
         }
       }
     </style>
+    
+    <!-- Source-wise analysis -->
+    <style>
+      #source-wise-analysis {
+        background: #f8f9fb;
+      }
+
+      #source-wise-analysis .sourcewise-shell {
+        max-width: 1380px;
+        margin: 0 auto;
+      }
+
+      #source-wise-analysis .sourcewise-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 2.5rem 2.75rem;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      #source-wise-analysis .sourcewise-title {
+        text-align: center;
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+
+      #source-wise-analysis .sourcewise-title::after {
+        content: "";
+        display: block;
+        width: 70px;
+        height: 3px;
+        margin: 0.85rem auto 1.6rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
+      }
+
+      #source-wise-analysis .sourcewise-note {
+        max-width: 1120px;
+        margin: 0 auto 1rem;
+        color: #475569;
+        font-size: 1.02rem;
+        line-height: 1.85;
+        text-align: justify;
+      }
+
+      #source-wise-analysis .sourcewise-block {
+        margin-top: 2rem;
+      }
+
+      #source-wise-analysis .sourcewise-section-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 1rem;
+      }
+
+      #source-wise-analysis .sourcewise-table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border-radius: 18px;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+      }
+
+      #source-wise-analysis .sourcewise-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 860px;
+        font-size: 0.95rem;
+      }
+
+      #source-wise-analysis .sourcewise-table thead th {
+        background: #f1f5f9;
+        color: #0f172a;
+        font-weight: 800;
+        padding: 0.9rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #dbe3ef;
+        white-space: nowrap;
+      }
+
+      #source-wise-analysis .sourcewise-table tbody td {
+        padding: 0.82rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #eef2f7;
+        color: #1f2937;
+        white-space: nowrap;
+      }
+
+      #source-wise-analysis .sourcewise-table tbody tr:nth-child(even) {
+        background: #fafafa;
+      }
+
+      #source-wise-analysis .sourcewise-table tbody tr:hover {
+        background: #eef6ff;
+      }
+
+      #source-wise-analysis .sourcewise-table td:first-child,
+      #source-wise-analysis .sourcewise-table th:first-child {
+        text-align: left;
+        font-weight: 700;
+      }
+
+      #source-wise-analysis .sourcewise-table td:nth-child(2),
+      #source-wise-analysis .sourcewise-table th:nth-child(2) {
+        text-align: left;
+      }
+
+      #source-wise-analysis .sourcewise-group-start td {
+        border-top: 2px solid #cbd5e1;
+      }
+
+      #source-wise-analysis .sourcewise-self td {
+        background: #f8fbff;
+        font-weight: 600;
+      }
+
+      #source-wise-analysis .sourcewise-open {
+        color: #2563eb;
+      }
+
+      #source-wise-analysis .sourcewise-proprietary {
+        color: #ea580c;
+      }
+
+      #source-wise-analysis .sourcewise-subnote {
+        color: #64748b;
+        font-size: 0.92rem;
+        text-align: center;
+        margin-top: 0.9rem;
+      }
+    </style>
+
+    <section class="section" id="source-wise-analysis">
+      <div class="container sourcewise-shell">
+        <div class="sourcewise-card">
+          <h2 class="sourcewise-title">Source-wise Analysis</h2>
+
+          <p class="sourcewise-note">
+            To examine whether the self-recorded subset behaves differently from public-source samples,
+            we conduct a source-wise analysis with five representative MLLMs:
+            <strong>InternVL3.5-1B</strong>, <strong>InternVL3.5-2B</strong>,
+            <strong>InternVL3.5-8B</strong>, <strong>LLaVA-OneVision-1.5-4B</strong>,
+            and <strong>Qwen3-VL-Plus</strong>. For each model, we aggregate results across
+            all four task groups and compare different video sources using
+            <strong>Accuracy</strong>, <strong>Reasoning Score (R)</strong>, and
+            <strong>Spurious Correct Rate (SCR)</strong>.
+          </p>
+
+          <p class="sourcewise-note">
+            As one representative example, for InternVL3.5-8B, public-source samples obtain
+            <strong>Acc/R/SCR = 64.08/2.54/4.64</strong> over <strong>2,859</strong> samples,
+            while self-recorded samples obtain
+            <strong>Acc/R/SCR = 59.75/2.36/4.28</strong> over <strong>313</strong> samples.
+            These results suggest that the self-recorded subset is not an artificially easier source
+            and shows comparable answer-reasoning consistency to public-source samples.
+          </p>
+
+          <div class="sourcewise-block">
+            <h3 class="sourcewise-section-title">Results by Video Source</h3>
+
+            <div class="sourcewise-table-wrap">
+              <table class="sourcewise-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Video Source</th>
+                    <th>#Samples</th>
+                    <th>Acc (%)</th>
+                    <th>R</th>
+                    <th>SCR (%)</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="sourcewise-group-start">
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>Charades-Ego</td>
+                    <td>628</td>
+                    <td>53.66</td>
+                    <td>2.17</td>
+                    <td>14.54</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>EPIC-KITCHENS</td>
+                    <td>266</td>
+                    <td>57.14</td>
+                    <td>2.13</td>
+                    <td>16.45</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>Ego4D</td>
+                    <td>1,351</td>
+                    <td>55.59</td>
+                    <td>2.30</td>
+                    <td>11.98</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>HD-EPIC</td>
+                    <td>463</td>
+                    <td>52.70</td>
+                    <td>2.18</td>
+                    <td>12.70</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>MECCANO</td>
+                    <td>151</td>
+                    <td>51.66</td>
+                    <td>2.13</td>
+                    <td>15.38</td>
+                  </tr>
+                  <tr class="sourcewise-self">
+                    <td class="sourcewise-open">InternVL3.5-1B</td>
+                    <td>Self-recording</td>
+                    <td>313</td>
+                    <td>50.48</td>
+                    <td>2.08</td>
+                    <td>12.03</td>
+                  </tr>
+
+                  <tr class="sourcewise-group-start">
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>Charades-Ego</td>
+                    <td>628</td>
+                    <td>58.76</td>
+                    <td>2.38</td>
+                    <td>7.86</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>EPIC-KITCHENS</td>
+                    <td>266</td>
+                    <td>59.77</td>
+                    <td>2.55</td>
+                    <td>6.29</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>Ego4D</td>
+                    <td>1,351</td>
+                    <td>60.77</td>
+                    <td>2.52</td>
+                    <td>6.21</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>HD-EPIC</td>
+                    <td>463</td>
+                    <td>62.20</td>
+                    <td>2.53</td>
+                    <td>6.25</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>MECCANO</td>
+                    <td>151</td>
+                    <td>64.90</td>
+                    <td>2.58</td>
+                    <td>6.12</td>
+                  </tr>
+                  <tr class="sourcewise-self">
+                    <td class="sourcewise-open">InternVL3.5-2B</td>
+                    <td>Self-recording</td>
+                    <td>313</td>
+                    <td>62.94</td>
+                    <td>2.51</td>
+                    <td>6.09</td>
+                  </tr>
+
+                  <tr class="sourcewise-group-start">
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>Charades-Ego</td>
+                    <td>628</td>
+                    <td>64.97</td>
+                    <td>2.52</td>
+                    <td>4.17</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>EPIC-KITCHENS</td>
+                    <td>266</td>
+                    <td>62.78</td>
+                    <td>2.47</td>
+                    <td>5.39</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>Ego4D</td>
+                    <td>1,351</td>
+                    <td>64.99</td>
+                    <td>2.59</td>
+                    <td>5.13</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>HD-EPIC</td>
+                    <td>463</td>
+                    <td>60.91</td>
+                    <td>2.46</td>
+                    <td>3.19</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>MECCANO</td>
+                    <td>151</td>
+                    <td>64.24</td>
+                    <td>2.65</td>
+                    <td>5.15</td>
+                  </tr>
+                  <tr class="sourcewise-self">
+                    <td class="sourcewise-open">InternVL3.5-8B</td>
+                    <td>Self-recording</td>
+                    <td>313</td>
+                    <td>59.74</td>
+                    <td>2.36</td>
+                    <td>4.28</td>
+                  </tr>
+
+                  <tr class="sourcewise-group-start">
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>Charades-Ego</td>
+                    <td>628</td>
+                    <td>58.60</td>
+                    <td>2.33</td>
+                    <td>11.96</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>EPIC-KITCHENS</td>
+                    <td>266</td>
+                    <td>57.89</td>
+                    <td>2.38</td>
+                    <td>11.04</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>Ego4D</td>
+                    <td>1,351</td>
+                    <td>62.77</td>
+                    <td>2.56</td>
+                    <td>10.02</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>HD-EPIC</td>
+                    <td>463</td>
+                    <td>59.83</td>
+                    <td>2.62</td>
+                    <td>9.03</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>MECCANO</td>
+                    <td>151</td>
+                    <td>60.93</td>
+                    <td>2.54</td>
+                    <td>7.61</td>
+                  </tr>
+                  <tr class="sourcewise-self">
+                    <td class="sourcewise-open">LLaVA-OneVision-1.5-4B</td>
+                    <td>Self-recording</td>
+                    <td>313</td>
+                    <td>63.26</td>
+                    <td>2.53</td>
+                    <td>10.10</td>
+                  </tr>
+
+                  <tr class="sourcewise-group-start">
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>Charades-Ego</td>
+                    <td>628</td>
+                    <td>63.85</td>
+                    <td>2.92</td>
+                    <td>8.73</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>EPIC-KITCHENS</td>
+                    <td>266</td>
+                    <td>65.79</td>
+                    <td>3.11</td>
+                    <td>6.29</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>Ego4D</td>
+                    <td>1,351</td>
+                    <td>68.10</td>
+                    <td>3.17</td>
+                    <td>6.74</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>HD-EPIC</td>
+                    <td>463</td>
+                    <td>63.71</td>
+                    <td>2.96</td>
+                    <td>12.20</td>
+                  </tr>
+                  <tr>
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>MECCANO</td>
+                    <td>151</td>
+                    <td>64.24</td>
+                    <td>3.18</td>
+                    <td>6.19</td>
+                  </tr>
+                  <tr class="sourcewise-self">
+                    <td class="sourcewise-proprietary">Qwen3-VL-Plus</td>
+                    <td>Self-recording</td>
+                    <td>313</td>
+                    <td>69.97</td>
+                    <td>3.14</td>
+                    <td>5.48</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="sourcewise-subnote">
+              Results are aggregated across all four task groups for each model and video source.
+              Self-recording rows are lightly highlighted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Examples -->
     <section class="section is-light" id="examples" style="background: #f8f9fb;">
